@@ -14,6 +14,9 @@ import "popper.js";
 import "bootstrap";
 import "../stylesheets/application" 
 
+//fortawesomeの反映
+import '@fortawesome/fontawesome-free/js/all'
+
 //新規作成したcssファイルの反映（例）
 //import '../stylesheets/ファイル名.css'
 
