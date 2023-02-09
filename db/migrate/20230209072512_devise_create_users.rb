@@ -32,8 +32,13 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
       # t.string   :unlock_token # Only if unlock strategy is :email or :both
       # t.datetime :locked_at
 
+      ## 会員の名前（ニックネーム）を保存するカラム
+      t.string :name, null: false
+      ## 会員の退会機能用ステータスカラム、boolean型で真偽判別・デフォルトはfalseで設定しています。
+      t.boolean :status, null: false,  default: false
 
-      t.timestamps null: false
+      ## 会員の登録・更新日時がデフォルトでnowになるように設定しています。
+      t.timestamps null: false, default: ->{ "CURRENT_TIMESTAMP" }
     end
 
     add_index :users, :email,                unique: true
