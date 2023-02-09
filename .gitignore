@@ -38,3 +38,6 @@
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+
+#.envファイルに設定した秘密キーをGitHubに間違ってpushしないようにこの.gitignore（git無視ファイル）に記述しました。
+/.env

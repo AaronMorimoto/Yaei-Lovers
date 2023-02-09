@@ -57,3 +57,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 #devise導入用gem
 gem 'devise'
+
+#dotenv-rails導入用gem
+gem 'dotenv-rails'
