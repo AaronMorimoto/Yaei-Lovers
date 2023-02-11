@@ -14,10 +14,10 @@ class CreatePosts < ActiveRecord::Migration[6.1]
       t.text :body, null: false
       ## 住所用カラム
       t.string :address, null: false
-      ## 郵便番号用カラム
-      t.string :postal_code, null: false
-      ## 座標用カラム
-      t.string :coordinate, null: false
+      ## 経度用カラム
+      t.float :longitude, null: false
+      ## 緯度用カラム
+      t.float :latitude, null: false
       ## アクセス方法用カラム
       t.text :access, null: false
       ## 設備用カラム
