@@ -81,8 +81,8 @@ ActiveRecord::Schema.define(version: 2023_02_10_131858) do
     t.string "name", null: false
     t.text "body", null: false
     t.string "address", null: false
-    t.string "postal_code", null: false
-    t.string "coordinate", null: false
+    t.float "longitude", null: false
+    t.float "latitude", null: false
     t.text "access", null: false
     t.string "facility", null: false
     t.string "contact", null: false
