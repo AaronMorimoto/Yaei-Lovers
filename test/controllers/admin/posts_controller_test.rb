@@ -1,6 +1,6 @@
 require "test_helper"
 
-class Public::FavoritesControllerTest < ActionDispatch::IntegrationTest
+class Admin::PostsControllerTest < ActionDispatch::IntegrationTest
   # test "the truth" do
   #   assert true
   # end
