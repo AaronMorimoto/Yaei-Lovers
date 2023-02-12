@@ -9,9 +9,9 @@ class Public::PostCommentsController < ApplicationController
   end
 
   def destroy
-    PostComment.find_by(id: params[:id], book_id: params[:book_id]).destroy
+    PostComment.find_by(id: params[:id], post_id: params[:post_id]).destroy
     redirect_to request.referer
-    #@comment = BookComment.find(params[:id])
+    #@comment = PostComment.find(params[:id])
     #@comment.destroy
   end
 
