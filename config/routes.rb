@@ -1,39 +1,37 @@
 Rails.application.routes.draw do
+  
+  devise_for :admin, controllers: {
+    sessions: 'admin/sessions',
+  }
+
   namespace :admin do
-    get 'users/index'
-    get 'users/show'
-    get 'users/edit'
+    root to: "homes#top"
+    resources :environments, only: [:index, :create, :edit, :update, :destroy]
+    resources :prefectures, only: [:index, :create, :edit, :update, :destroy]
+    resources :users, only: [:index, :show, :edit, :update]
+    resources :post_comments, only: [:destroy]
   end
-  namespace :admin do
-    get 'prefectures/index'
-    get 'prefectures/edit'
+
+  devise_for :users, controllers: {
+    registrations: 'public/registrations',
+    sessions: 'public/sessions',
+  }
+  
+  scope module: :public do
+    root to: "homes#top"
+    get "how_to" => "homes#how_to"
+    
+    resources :users, only: [:show, :edit, :update] do
+      collection do
+        get 'confirm_withdraw'
+        patch 'withdraw'
+      end
+    end
+    
+    resources :posts
+    resources :post_comments, only: [:create, :destroy]
+    resources :favorites, only: [:show, :create, :destroy]
+    
   end
-  namespace :admin do
-    get 'environments/index'
-    get 'environments/edit'
-  end
-  namespace :admin do
-    get 'homes/top'
-  end
-  namespace :public do
-    get 'favorites/show'
-  end
-  namespace :public do
-    get 'users/show'
-    get 'users/edit'
-    get 'users/confirm_withdraw'
-  end
-  namespace :public do
-    get 'posts/index'
-    get 'posts/show'
-    get 'posts/new'
-    get 'posts/edit'
-  end
-  namespace :public do
-    get 'homes/top'
-    get 'homes/how_to'
-  end
-  devise_for :users
-  devise_for :admins
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
