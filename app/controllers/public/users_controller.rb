@@ -17,6 +17,11 @@ class Public::UsersController < ApplicationController
     end
   end
   
+  #お気に入り一覧画面用アクション
+  def favorites
+    
+  end
+  
   #退会確認画面用アクション
   def confirm_withdraw
     @user = User.find(params[:id])
