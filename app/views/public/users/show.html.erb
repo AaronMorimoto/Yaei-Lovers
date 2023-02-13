@@ -1,2 +1,69 @@
-<h1>Public::Users#show</h1>
-<p>Find me in app/views/public/users/show.html.erb</p>
+<div class="container">
+  <div class="row">
+    <h4>
+      マイページ
+    </h4>
+  </div>
+  <div class="row">
+    <div class="col">
+      <h3>
+        登録情報
+        <%= link_to "編集する", edit_information_path, class: "btn btn-success" %>
+        <%= link_to "お気に入り一覧", user_favorites_path, class: "btn btn-primary" %>
+      </h3>
+      <table>
+        <thead>
+          <th></th>
+          <th></th>
+          <th></th>
+       　  <th></th>
+       　  <th></th>
+        </thead>
+        <tbody>
+          <tr>
+            <tb>image_tag (@post.user.get_profile_image.attached? ? @post.user.image : 'no-image.png'), id: "img_prev", size:"100x100"</tb>
+          </tr>
+          <tr>
+            <tb>ニックネーム</tb>
+            <tb><%= @user.name%></tb>
+    　　    </tr>
+    　　    <tr>
+    　       <tb>メールアドレス</tb>
+   　        <tb><%= @user.email%></tb>
+          </tr>
+          <tr>
+    　　      <tb>登録日</tb>
+    　　      <tb><%= @user.created_at%></tb>
+    　　    </tr>
+          <tr>
+            <tb>更新日</tb>
+    　　      <tb><%= @user.updated_at%></tb>
+    　　    </tr>
+        </tbody>
+      </table>
+      
+      <h3>
+        <%= @user.name%>さんの投稿一覧
+      </h3>
+      <table>
+        <thead>
+          <th></th>
+          <th></th>
+        </thead>
+        <tbody>
+          <tr>
+            <tb>image_tag (@post.user.get_profile_image.attached? ? @post.user.image : 'no-image.png'), id: "img_prev", size:"100x100"</tb>
+          </tr>
+          <tr>
+            <tb>野営地名</tb>
+            <tb>
+              link_to, post_path(@post) do
+                @post.name
+              end
+            </tb>
+    　　    </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

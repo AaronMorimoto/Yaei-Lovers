@@ -1,2 +1,4 @@
-<h1>Admin::Environments#edit</h1>
-<p>Find me in app/views/admin/environments/edit.html.erb</p>
+<section class="inner">
+  <h2 class="section-ttl">環境タグ編集</h2>
+  <%= render 'form', environment: @environment, url: admin_environment_path(@environment), method: :PATCH, submit: '更新' %>
+</section>
