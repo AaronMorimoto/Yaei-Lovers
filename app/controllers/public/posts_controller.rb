@@ -14,6 +14,7 @@ class Public::PostsController < ApplicationController
 
   def new
     @post = Post.new
+    #@post = Post.find(params[:id])
   end
 
   def edit
