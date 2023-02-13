@@ -1,0 +1,6 @@
+<%= form_with model:environment, url: url do |f| %>
+	<%= render 'layouts/error_messages', resource: environment %>
+	<%= f.label :name, "環境名:" %>
+	<%= f.text_field :name %>
+	<%= f.submit submit, class: "btn btn-primary ml2" %>
+<% end %>

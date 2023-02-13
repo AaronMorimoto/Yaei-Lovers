@@ -1,0 +1,6 @@
+<%= form_with model:prefecture, url: url do |f| %>
+	<%= render 'layouts/error_messages', resource: prefecture %>
+	<%= f.label :name, "県名:" %>
+	<%= f.text_field :name %>
+	<%= f.submit submit, class: "btn btn-primary ml2" %>
+<% end %>
