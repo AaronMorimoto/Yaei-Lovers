@@ -21,7 +21,7 @@
         </thead>
         <tbody>
           <tr>
-            <tb>image_tag @post.user.get_profile_image, size:"100x100"</tb>
+            <tb>image_tag (@post.user.get_profile_image.attached? ? @post.user.image : 'no-image.png'), id: "img_prev", size:"100x100"</tb>
           </tr>
           <tr>
             <tb>ニックネーム</tb>
@@ -52,7 +52,7 @@
         </thead>
         <tbody>
           <tr>
-            <tb>image_tag @post.user.get_profile_image, size:"100x100"</tb>
+            <tb>image_tag (@post.user.get_profile_image.attached? ? @post.user.image : 'no-image.png'), id: "img_prev", size:"100x100"</tb>
           </tr>
           <tr>
             <tb>野営地名</tb>
