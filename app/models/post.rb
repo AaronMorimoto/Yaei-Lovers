@@ -7,5 +7,6 @@ class Post < ApplicationRecord
   has_many :post_comments, dependent: :destroy
   
   # activestorageで複数の画像を投稿・保存する記述
-  has_many_attached :post_images
+  has_many_attached :images
+  
 end
