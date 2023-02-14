@@ -59,7 +59,7 @@
             <tr>
               <td>
                 <% post.images.each do |image| %>
-                  <%= image_tag(image, width:100) %>
+                  <%= image_tag(image, size:'50x50') %>
                 <% end %>
               </td>
               <td><%= link_to post.name,post, class: "post_#{post.id}" %></td>
