@@ -21,7 +21,7 @@
         </thead>
         <tbody>
           <tr>
-            <tb>image_tag (@post.user.get_profile_image.attached? ? @post.user.image : 'no-image.png'), id: "img_prev", size:"100x100"</tb>
+            <tb><%= image_tag @user.get_profile_image, size:'100x100' %></tb>
           </tr>
           <tr>
             <tb>ニックネーム</tb>
@@ -45,23 +45,28 @@
       <h3>
         <%= @user.name%>さんの投稿一覧
       </h3>
-      <table>
+      <table class='table table-hover table-inverse'>
         <thead>
-          <th></th>
-          <th></th>
+          <tr>
+            <th></th>
+            <th>野営地名</th>
+            <th>説明。コメント</th>
+            <th colspan="3"></th>
+          </tr>
         </thead>
         <tbody>
-          <tr>
-            <tb>image_tag (@post.user.get_profile_image.attached? ? @post.user.image : 'no-image.png'), id: "img_prev", size:"100x100"</tb>
-          </tr>
-          <tr>
-            <tb>野営地名</tb>
-            <tb>
-              link_to, post_path(@post) do
-                @post.name
-              end
-            </tb>
-    　　    </tr>
+          <% @posts.each do |post| %>
+            <tr>
+              <td>
+                <% post.images.each do |image| %>
+                  <%= image_tag(image, width:100) %>
+                <% end %>
+              </td>
+              <td><%= link_to post.name,post, class: "post_#{post.id}" %></td>
+              <td><%= post.body %></td>
+              <td><%= render "public/posts/static_rate", post: post %></td>
+            </tr>
+          <% end %>
         </tbody>
       </table>
     </div>
