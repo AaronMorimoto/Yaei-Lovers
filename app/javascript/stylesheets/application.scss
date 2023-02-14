@@ -2,3 +2,37 @@
 @import '~bootstrap/scss/bootstrap';
 //fortawesomeの導入
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
+
+.image_field {
+  width: 220px;
+  text-align: center;
+  p {
+    margin-top: 10px;
+    text-align: left;
+  }
+}
+.upload_image {
+  width: 220px;
+  height: 150px;
+
+  object-fit: cover;
+}
+.btn-file {
+  overflow: hidden;
+  position: relative;
+  input[type=file] {
+    display: block;
+    min-width: 100%;
+    min-height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 100px;
+    text-align: right;
+    cursor: inherit;
+    background: red;
+    opacity: 0;
+
+    filter: alpha(opacity=0);
+  }
+}
