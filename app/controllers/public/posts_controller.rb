@@ -14,7 +14,6 @@ class Public::PostsController < ApplicationController
 
   def new
     @post = Post.new
-    #@post = Post.find(params[:id])
   end
 
   def edit
@@ -49,7 +48,7 @@ class Public::PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:name, :body, :address, :longitude, :latitude, :access, :facility, :contact, :rate)
+    params.require(:post).permit(:user_id, :environment_id, :prefecture_id, :name, :body, :address, :longitude, :latitude, :access, :facility, :contact, :rate, images: [])
   end
   
   def ensure_correct_user
