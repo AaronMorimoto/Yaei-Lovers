@@ -1,2 +1,100 @@
-<h1>Public::Posts#show</h1>
-<p>Find me in app/views/public/posts/show.html.erb</p>
+<div class='container'>
+  <div class='row'>
+    <div class='col'>
+      <h2>投稿詳細</h2>
+        <table class='table'>
+          <tr>
+            <td>野営地名</td>
+            <td></td>
+            <td><%= @post.name %></td>
+          </tr>
+          <tr>
+            <td>評価</td>
+            <td></td>
+            <td><%= render "static_rate", post: @post %></td>
+          </tr>
+          <tr>
+            <td>画像</td>
+            <td></td>
+            <td>
+              <% @post.images.each do |image| %>
+                  <%= image_tag(image, size:'50x50') %>
+              <% end %>
+            </td>  
+          </tr>
+          <tr>
+            <td>説明＆コメント</td>
+            <td></td>
+            <td><%= @post.body %></td>
+          </tr>
+          <tr>
+            <td>都道府県</td>
+            <td></td>
+            <td><%= @post.prefecture_id %></td>
+          </tr>
+          <tr>
+            <td>環境</td>
+            <td></td>
+            <td><%= @post.environment_id %></td>
+          </tr>
+          <tr>
+            <td>住所</td>
+            <td></td>
+            <td><%= @post.address %></td>
+          </tr>
+          <tr>
+            <td>経度</td>
+            <td></td>
+            <td><%= @post.longitude %></td>
+          </tr>
+          <tr>
+            <td>緯度</td>
+            <td></td>
+            <td><%= @post.latitude %></td>
+          </tr>
+          <tr>
+            <td>アクセス方法</td>
+            <td></td>
+            <td><%= @post.access %></td>
+          </tr>
+          <tr>
+            <td>周辺設備（スーパーやコンビニなど）</td>
+            <td></td>
+            <td><%= @post.facility %></td>
+          </tr>
+          <tr>
+            <td>野営許可申請先</td>
+            <td></td>
+            <td><%= @post.contact %></td>
+          </tr>
+          <tr>
+            <td>お気に入り</td>
+            <td></td>
+            <td class=<%= "favorite-" + @post.id.to_s %> >
+              <%= render "favorites/btn", post: @post %>
+            </td>
+          </tr>
+          <tr>
+            <td>コメント数</td>
+            <td></td>
+            <td class="post-comments-counter">
+              <%= render "post_comments/counter", post: @post %>
+            </td>
+          </tr>
+          <tr>
+            <% if @post.user == current_user %>
+              <td><%= link_to '編集', edit_post_path(@post), class: "btn btn-sm btn-success edit_post_#{@post.id}" %></td>
+              <td><%= link_to '削除', @post, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger destroy_post_#{@post.id}" %></td>
+            <% end %>
+          </tr>
+        </table>
+      
+      <div class="post-comments-index">
+        <%= render "post_comments/index", post: @post %>
+      </div>
+      
+      <%= render "post_comments/form", post: @post, post_comment: @post_comment %>
+      
+    </div>
+  </div>
+</div>
