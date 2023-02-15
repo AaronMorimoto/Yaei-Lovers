@@ -14,4 +14,9 @@ class Post < ApplicationRecord
     (images.attached?) ? images : 'no-image.png'
   end
   
+  #Favoritesテーブル内にuser_idが存在すか確認用
+  def favorited_by?(user)
+    favorites.exists?(user_id: user_id)
+  end
+  
 end
