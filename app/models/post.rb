@@ -14,17 +14,4 @@ class Post < ApplicationRecord
     (images.attached?) ? images : 'no-image.png'
   end
   
-  #def get_images(*size)
-   # unless images.attached?
-    #  file_path = Rails.root.join('app/assets/images/no-image.png')
-     # images.attach(io: File.open(file_path), filename: 'no-image.png', content_type: 'image/png')
-    #end
-    
-  #  if !size.empty?
-   #   images.variant(resize: size)
-  #  else
-   #   image
-  #  end
-  #end
-  
 end
