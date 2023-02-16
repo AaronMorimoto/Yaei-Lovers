@@ -36,3 +36,9 @@
     filter: alpha(opacity=0);
   }
 }
+.user_image {
+  width: 220px;
+  height: 150px;
+
+  object-fit: cover;
+}
