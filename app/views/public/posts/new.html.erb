@@ -8,20 +8,20 @@
         <!-- 投稿画像プレビュー機能用javascript -->
         <script type="text/javascript">
           $(function() {
-           function readURL(input) {
-             if (input.files && input.files[0]) {
-               var reader = new FileReader();
-               reader.onload = function (e) {
-                 $('#img_prev').attr('src', e.target.result);
-               }
-               reader.readAsDataURL(input.files[0]);
-             }
-           }
-           $("#post_image").change(function(){
-             readURL(this);
-           });
+            function readURL(input) {
+              if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                  $('#img_prev').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+              }
+            }
+            $("#post_image").change(function(){
+              readURL(this);
+            });
           });
-          </script>
+        </script>
         
         <p>選択するとプレビューされます。<br>画像未選択のままだと、<br>「画像準備中」になります。</p>
         

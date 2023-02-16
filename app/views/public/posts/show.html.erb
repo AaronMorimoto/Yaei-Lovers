@@ -71,29 +71,29 @@
             <td>お気に入り</td>
             <td></td>
             <td class=<%= "favorite-" + @post.id.to_s %> >
-              <%= render "favorites/btn", post: @post %>
+              <%= render "public/favorites/btn", post: @post %>
             </td>
           </tr>
           <tr>
             <td>コメント数</td>
             <td></td>
             <td class="post-comments-counter">
-              <%= render "post_comments/counter", post: @post %>
+              <%= render "public/post_comments/counter", post: @post %>
             </td>
           </tr>
           <tr>
             <% if @post.user == current_user %>
-              <td><%= link_to '編集', edit_post_path(@post), class: "btn btn-sm btn-success edit_post_#{@post.id}" %></td>
-              <td><%= link_to '削除', @post, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger destroy_post_#{@post.id}" %></td>
+              <td><%= link_to '編集', edit_post_path(@post), class: "btn btn-lg btn-success edit_post_#{@post.id}" %></td>
+              <td><%= link_to '削除', @post, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-lg btn-danger destroy_post_#{@post.id}" %></td>
             <% end %>
           </tr>
         </table>
       
       <div class="post-comments-index">
-        <%= render "post_comments/index", post: @post %>
+        <%= render "public/post_comments/index", post: @post %>
       </div>
       
-      <%= render "post_comments/form", post: @post, post_comment: @post_comment %>
+      <%= render "public/post_comments/form", post: @post, post_comment: @post_comment %>
       
     </div>
   </div>
