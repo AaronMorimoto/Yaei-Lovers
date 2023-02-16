@@ -25,7 +25,6 @@ class Public::UsersController < ApplicationController
   
   #退会確認画面用アクション
   def confirm_withdraw
-    @user = User.find(params[:id])
   end
   
   #退会用アクション
