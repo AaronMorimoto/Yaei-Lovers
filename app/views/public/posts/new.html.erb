@@ -3,7 +3,9 @@
     <div>
       <%= f.label :images, "画像" %>
       <div class="image_field">
+        <!-- image_tagでプレビューを行うためにscriptから送られてくる要素を(id: "img_prev")で指定、(attached? ? ファイル : ファイル)による真偽で表示を変更-->
         <%= image_tag (@post.images.attached? ? @post.images : 'no-image.png'), id: "img_prev", class: "upload_image" %>
+        <!-- (multiple: true)で画像を複数投稿、(id: :post_image)でscriptにアップロードしたデータを送る、(accept:'image/*')で全拡張子を許可 -->
         <span class="btn btn-file btn-primary"><%= f.file_field :images, multiple: true, id: :post_image,  accept:'image/*' %>画像選択</span>
         <!-- 投稿画像プレビュー機能用javascript -->
         <script type="text/javascript">
