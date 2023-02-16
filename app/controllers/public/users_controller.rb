@@ -10,7 +10,6 @@ class Public::UsersController < ApplicationController
   end
 
   def update
-    @user = User.find(params[:id])
     if @user.update(user_params)
       redirect_to mypage_path(@user), notice: "You have updated user_info successfully."
     else
@@ -29,7 +28,6 @@ class Public::UsersController < ApplicationController
   
   #退会用アクション
   def withdraw
-    @user = User.find_by(email: params[:email])
     @user.update(status: true)
     reset_session
     redirect_to root_path
