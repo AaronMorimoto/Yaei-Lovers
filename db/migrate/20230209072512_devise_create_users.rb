@@ -37,8 +37,8 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
       ## 会員の退会機能用ステータスカラム、boolean型で真偽判別・デフォルトはfalseで設定しています。
       t.boolean :status, null: false,  default: false
 
-      ## 会員の登録・更新日時がデフォルトでnowになるように設定しています。
-      t.timestamps null: false, default: ->{ "CURRENT_TIMESTAMP" }
+      
+      t.timestamps null: false
     end
 
     add_index :users, :email,                unique: true
