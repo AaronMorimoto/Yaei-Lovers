@@ -18,11 +18,17 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
     registrations: 'public/registrations',
     sessions: 'public/sessions',
+    passwords: 'puclic/passwords'
   }
   
   scope module: :public do
     root to: "homes#top"
     get "how_to" => "homes#how_to"
+    
+    devise_scope :user do
+      #ゲストログイン用ルート
+      post 'user/guest_sign_in' => 'sessions#guest_sign_in'
+    end
     
     ##urlにidが含まれないようにuserはそれぞれurlを指定しています。
     #会員マイページ
