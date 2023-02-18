@@ -22,8 +22,8 @@
         </td>
         <td><%= link_to post.name, post_path(post), class: "post_#{post.id}" %></td>
         <td><%= render "static_rate", post: post %></td>
-        <td><%= post.prefecture_id %></td>
-        <td><%= post.environment_id %></td>
+        <td><%= post.prefecture.name %></td>
+        <td><%= post.environment.name %></td>
         <td class=<%= "favorite-" + post.id.to_s %> >
             <%= render "public/favorites/btn", post: post %>
         </td>
