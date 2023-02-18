@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
     registrations: 'public/registrations',
     sessions: 'public/sessions',
-    passwords: 'puclic/passwords'
+    passwords: 'puclic/passwords',
   }
   
   scope module: :public do
@@ -46,7 +46,7 @@ Rails.application.routes.draw do
     
     resources :posts do
       resources :post_comments, only: [:create, :destroy]
-      resource :favorites, only: [:create, :destroy]
+      resource :favorites, only: [:index, :create, :destroy]
     end
     
   end
