@@ -2,6 +2,7 @@
 
 class Public::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [:create]
+  before_action :confirm_guest_user, only: [:update, :destroy]
   # before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
@@ -59,6 +60,13 @@ class Public::RegistrationsController < Devise::RegistrationsController
 
   def after_update_path_for(resource)
     mypage_path
+  end
+  
+  #ゲストユーザー更新＆削除回避用、destroyアクションの動作前に，メールアドレスがゲストユーザー用になっていないかチェックするように設定しています。
+  def confirm_guest_user
+    if resource.email == 'guest@example.com'
+      redirect_to root_path, alert: 'ゲストユーザーの更新と削除はできません'
+    end
   end
 
   # The path used after sign up for inactive accounts.
