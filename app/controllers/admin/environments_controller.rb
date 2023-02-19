@@ -1,4 +1,6 @@
 class Admin::EnvironmentsController < ApplicationController
+  before_action :authenticate_admin!
+  before_action :ensure_environment, only: [:show, :edit, :update]
   
   def index
     @environment = Environment.new
@@ -16,12 +18,11 @@ class Admin::EnvironmentsController < ApplicationController
   end
 
   def edit
-    @environment = Environment.find(params[:id])
   end
 
   def update
-    @environment = Environment.find(params[:id])
     if @environment.update(environment_params)
+      @environment.posts.update_all
       redirect_to admin_environments_path
     else
       render "edit"
@@ -29,8 +30,8 @@ class Admin::EnvironmentsController < ApplicationController
   end
 
   def destroy
-    @environment = Environment.find(params[:id])
     @environment.destroy
+    @environment.posts.destroy_all
     redirect_to admin_environments_path
   end
 
@@ -38,6 +39,10 @@ class Admin::EnvironmentsController < ApplicationController
 
   def environment_params
     params.require(:environment).permit(:name)
+  end
+  
+  def ensure_environment
+    @environment = Environment.find(params[:id])
   end
   
 end
