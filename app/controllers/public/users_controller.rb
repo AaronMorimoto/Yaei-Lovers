@@ -19,7 +19,10 @@ class Public::UsersController < ApplicationController
   
   #お気に入り一覧画面用アクション
   def favorites
-    
+    @posts = @user.posts
+    #favoriteモデルからwhereメソッドとpluckメソッドを使ってログイン中のuser_idとpost_idを引っ張っててfavoritesに代入しています。
+    favorites = Favorite.where(user_id: current_user.id).pluck(:post_id)
+    @favorite_index = Post.find(favorites)
   end
   
   #退会確認画面用アクション

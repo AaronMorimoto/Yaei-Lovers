@@ -1,0 +1,44 @@
+<div class="container">
+  <div class="row">
+    <h4>
+      <%= @user.name%>さんのお気に入り一覧
+    </h4>
+  </div>
+  <div class="row">
+    <div class="col">
+      <%= link_to "マイページへ", mypage_path, class: "btn btn-success" %>
+      <table class='table table-hover table-inverse'>
+        <thead>
+          <tr>
+            <th></th>
+            <th>野営地名</th>
+            <th>説明・コメント</th>
+            <th>評価</th>
+            <th>お気に入り</th>
+            <th colspan="2"></th>
+          </tr>
+        </thead>
+        <tbody>
+        <!-- お気に入り一覧表示用-->
+        <% if @favorite_index.present? %>
+          <% @favorite_index.each do |post| %>
+            <tr>
+              <td>
+                <% post.images.each do |image| %>
+                  <%= image_tag(image, size:'50x50') %>
+                <% end %>
+              </td>
+              <td><%= link_to post.name, post, class: "post_#{post.id}" %></td>
+              <td><%= post.body %></td>
+              <td><%= render "public/posts/static_rate", post: post %></td>
+              <td class=<%= "favorite-" + post.id.to_s %> >
+                <%= render "public/favorites/btn", post: post %>
+              </td>
+            </tr>
+          <% end %>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
