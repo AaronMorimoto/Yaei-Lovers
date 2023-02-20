@@ -1,6 +1,6 @@
 class Admin::EnvironmentsController < ApplicationController
   before_action :authenticate_admin!
-  before_action :ensure_environment, only: [:show, :edit, :update]
+  before_action :set_environment, only: [:show, :edit, :update, :destroy]
   
   def index
     @environment = Environment.new
@@ -30,7 +30,6 @@ class Admin::EnvironmentsController < ApplicationController
 
   def destroy
     @environment.destroy
-    @environment.posts.destroy_all
     redirect_to admin_environments_path
   end
 
@@ -40,7 +39,7 @@ class Admin::EnvironmentsController < ApplicationController
     params.require(:environment).permit(:name)
   end
   
-  def ensure_environment
+  def set_environment
     @environment = Environment.find(params[:id])
   end
   
