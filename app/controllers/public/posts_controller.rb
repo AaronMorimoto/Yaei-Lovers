@@ -3,7 +3,15 @@ class Public::PostsController < ApplicationController
   before_action :ensure_correct_user, only: [:edit, :update, :destroy]
   
   def index
-    @posts = Post.all
+    #絞り込み検索用に記述
+    if params[:environment_id].present?
+       params[:prefecture_id].present?
+       #params[:rate].present?
+      @posts = Post.where(environment_id: "#{params[:environment_id]}", prefecture_id: "#{params[:prefecture_id]}")
+      #@posts = Post.where(environment_id: "#{params[:environment_id]}", prefecture_id: "#{params[:prefecture_id]}", rate: "#{params[:rate]}")
+    else
+      @posts = Post.all
+    end
   end
 
   def show

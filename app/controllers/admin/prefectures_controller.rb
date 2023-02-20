@@ -1,4 +1,6 @@
 class Admin::PrefecturesController < ApplicationController
+  before_action :authenticate_admin!
+  before_action :set_prefectures, only: [:show, :edit, :update, :destroy]
   
   def index
     @prefecture = Prefecture.new
@@ -8,7 +10,7 @@ class Admin::PrefecturesController < ApplicationController
   def create
     @prefecture = Prefecture.new(prefecture_params)
     if @prefecture.save
-      redirect_to request.referer
+      redirect_to admin_prefectures_path
     else
       @prefectures = Prefecture.all
       render 'index'
@@ -16,11 +18,9 @@ class Admin::PrefecturesController < ApplicationController
   end
 
   def edit
-    @prefecture = Prefecture.find(params[:id])
   end
 
   def update
-    @prefecture = Prefecture.find(params[:id])
     if @prefecture.update(prefecture_params)
       redirect_to admin_prefectures_path
     else
@@ -29,7 +29,6 @@ class Admin::PrefecturesController < ApplicationController
   end
 
   def destroy
-    @prefecture = Prefecture.find(params[:id])
     @prefecture.destroy
     redirect_to admin_prefectures_path
   end
@@ -38,6 +37,10 @@ class Admin::PrefecturesController < ApplicationController
 
   def prefecture_params
     params.require(:prefecture).permit(:name)
+  end
+  
+  def set_prefectures
+    @prefecture = Prefecture.find(params[:id])
   end
   
 end
