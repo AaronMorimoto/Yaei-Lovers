@@ -3,7 +3,7 @@ class Public::PostsController < ApplicationController
   before_action :ensure_correct_user, only: [:edit, :update, :destroy]
   
   def index
-    #検索用に記述
+    #絞り込み検索用に記述
     if params[:environment_id].present?
        params[:prefecture_id].present?
        #params[:rate].present?

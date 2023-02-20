@@ -10,7 +10,7 @@ class Admin::PrefecturesController < ApplicationController
   def create
     @prefecture = Prefecture.new(prefecture_params)
     if @prefecture.save
-      redirect_to request.referer
+      redirect_to admin_prefectures_path
     else
       @prefectures = Prefecture.all
       render 'index'
@@ -22,7 +22,6 @@ class Admin::PrefecturesController < ApplicationController
 
   def update
     if @prefecture.update(prefecture_params)
-      @prefecture.posts.update_all
       redirect_to admin_prefectures_path
     else
       render "edit"
