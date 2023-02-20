@@ -16,7 +16,7 @@
       <tbody>
         <% @environments.each do |environment| %>
           <tr>
-            <td><%= link_to environment.name, posts_path(environment_id: environment.id), class: "underline" %></td>
+            <td><%= link_to environment.name, admin_root_path(environment_id: environment.id), class: "underline" %></td>
           <% if admin_signed_in? %>
             <td class="text-center"><%= link_to "編集", edit_admin_environment_path(environment), class: "btn btn-success" %></td>
             <td class="text-center"><%= link_to '削除', admin_environment_path(environment), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-danger" %></td>
