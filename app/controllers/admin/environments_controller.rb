@@ -10,7 +10,7 @@ class Admin::EnvironmentsController < ApplicationController
   def create
     @environment = Environment.new(environment_params)
     if @environment.save
-      redirect_to request.referer
+      redirect_to admin_environments_path
     else
       @environments = Environment.all
       render 'index'
@@ -22,7 +22,6 @@ class Admin::EnvironmentsController < ApplicationController
 
   def update
     if @environment.update(environment_params)
-      @environment.posts.update_all
       redirect_to admin_environments_path
     else
       render "edit"
