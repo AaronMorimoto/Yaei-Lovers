@@ -1,4 +1,6 @@
 <section class="inner">
   <h2 class="section-ttl">県名タグ編集</h2>
-  <%= render 'form', prefecture: @prefecture, url: admin_prefecture_path(@prefecture), method: :PATCH, submit: '更新' %>
+  <% if admin_signed_in? %>
+    <%= render 'form', prefecture: @prefecture, url: admin_prefecture_path(@prefecture), method: :PATCH, submit: '更新' %>
+  <% end %>
 </section>

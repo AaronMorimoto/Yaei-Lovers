@@ -16,8 +16,11 @@
       <tbody>
         <% @prefectures.each do |prefecture| %>
           <tr>
-            <td><%= link_to prefecture.name, posts_path(prefecture_id: prefecture.id), class: "underline" %></td>
+            <td><%= link_to prefecture.name, admin_root_path(prefecture_id: prefecture.id), class: "underline" %></td>
+          <% if admin_signed_in? %>
             <td class="text-center"><%= link_to "編集", edit_admin_prefecture_path(prefecture), class: "btn btn-success" %></td>
+            <td class="text-center"><%= link_to '削除', admin_prefecture_path(prefecture), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-danger" %></td>
+          <% end %>
           </tr>
         <% end %>
       </tbody>
