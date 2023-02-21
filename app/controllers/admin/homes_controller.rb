@@ -1,4 +1,5 @@
 class Admin::HomesController < ApplicationController
+  
   def top
     #環境タグでを指定した際の一覧表示
     if params[:environment_id].present? then
@@ -11,4 +12,5 @@ class Admin::HomesController < ApplicationController
       @posts = Post.all
     end
   end
+  
 end
