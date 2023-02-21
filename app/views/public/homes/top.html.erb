@@ -1,13 +1,1 @@
-<%= form_with url: posts_path, local: true, method: :get do |form| %>
-  <table>
-    <tr>
-      <td><%= form.label :prefecture_id, "都道府県" %></td>
-      <td class="select_field"><%= form.collection_select :prefecture_id, Prefecture.all, :id, :name %></td>
-    </tr>
-    <tr>
-      <td><%= form.label :environment_id, "環境" %></td>
-      <td class="select_field"><%= form.collection_select :environment_id, Environment.all, :id, :name %></td>
-    </tr>
-  </table>
-  <%= form.submit "検索" %>
-<% end %>
+<%= render "public/posts/index", posts: @posts %>
