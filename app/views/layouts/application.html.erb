@@ -16,47 +16,13 @@
   </head>
 
   <body>
-    <header class="<%= (admin_signed_in? ? "admin_header" : "" )%>">
-      <div class = "content">
-        <%= link_to 'Yaei Lovers', (admin_signed_in? ? admin_root_path : root_path ), class: "logo" %>
-          <ul class="flex">
-            <% if admin_signed_in? %>
-              <li><%= link_to 'トップへ', admin_root_path %></li>
-              <li><%= link_to '野営の心得', how_to_path %></li>
-              <li><%= link_to '会員一覧', admin_users_path %></li>
-              <li><%= link_to '環境一覧', admin_environments_path %></li>
-              <li><%= link_to '県名一覧', admin_prefectures_path %></li>
-              <li><%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %></li>
-            <% elsif user_signed_in? %>
-              <li><%= link_to 'トップへ', root_path %></li>
-              <li><%= link_to '野営の心得', how_to_path %></li>
-              <li><%= link_to 'マイページ', mypage_path %></li>
-              <li><%= link_to '新規投稿', new_post_path %></li>
-              <li><%= link_to '野営地一覧', posts_path %></li>
-              <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
-              <!--絞り込み検索フォーム-->
-              <li><%= render "layouts/search", post: @post %></li>
-            <% else %>
-              <li><%= link_to 'トップへ', root_path %></li>
-              <li><%= link_to '野営の心得', how_to_path %></li>
-              <li><%= link_to '野営地一覧', posts_path %></li>
-              <li><%= link_to 'ゲストログイン', user_guest_sign_in_path, method: :post %></li>
-              <li><%= link_to '新規登録', new_user_registration_path %></li>
-              <li><%= link_to 'ログイン', new_user_session_path %></li>
-            <% end %>
-          </ul>
-        <% if admin_signed_in? %>
-          <!-- 新規投稿順に表示する機能 -->
-        <% end %>
-      </div>
-    </header>
+    <%= render 'header' %>
     
     <main>
+      <p id="notice"><%= notice %></p>
       <%= yield %>
     </main>
     
-    <footer>
-      © Infratop Inc. All Rights Reserved.
-    </footer>
+    <%= render 'footer' %>
   </body>
 </html>
