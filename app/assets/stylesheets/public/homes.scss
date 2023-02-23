@@ -3,9 +3,10 @@
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
 .background_img {
-  opacity: 0.35;
-  color: #343a40;
+  color: #fff;
   height: auto;
   width: auto;
-  background-image: image-url("yaei-winter.jpg");
+  background-size: cover;
+  background-position: center;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), image-url("yaei-winter.jpg");
 }
