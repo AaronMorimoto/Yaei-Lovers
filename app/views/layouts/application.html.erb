@@ -15,15 +15,12 @@
 
   <body>
     <%= render 'layouts/header' %>
-    
     <main>
       <div class="background_img">
-        <p id="notice"><%= notice %></p>
+        <span id="notice"><%= notice %></span>
         <%= yield %>
       </div>
     </main>
-    
     <%= render 'layouts/footer' %>
   </body>
-  
 </html>
