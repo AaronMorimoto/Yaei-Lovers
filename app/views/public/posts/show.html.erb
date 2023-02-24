@@ -1,100 +1,107 @@
 <div class='container'>
+  <div class="row">
+    <div class="offset-1 text-center">
+      <h2 class="text-center px-3 py-3">
+        <strong>投稿詳細</strong>
+      </h2>
+    </div>
+  </div>
   <div class='row'>
     <div class='col'>
-      <h2>投稿詳細</h2>
-        <table class='table'>
+      <h2>野営地画像</h2>
+      <table class='table table-inverse border bg-light text-dark'>
+        <tbody>
           <tr>
-            <td>野営地名</td>
-            <td></td>
-            <td><%= @post.name %></td>
-          </tr>
-          <tr>
-            <td>評価</td>
-            <td></td>
-            <td><%= render "static_rate", post: @post %></td>
-          </tr>
-          <tr>
-            <td>画像</td>
-            <td></td>
-            <td>
+            <td colspan="3">
               <% @post.images.each do |image| %>
-                  <%= image_tag(image, size:'50x50') %>
+                  <%= image_tag(image, size:'192x108') %>
               <% end %>
-            </td>  
-          </tr>
-          <tr>
-            <td>説明＆コメント</td>
-            <td></td>
-            <td><%= @post.body %></td>
-          </tr>
-          <tr>
-            <td>都道府県</td>
-            <td></td>
-            <td><%= @post.prefecture.name %></td>
-          </tr>
-          <tr>
-            <td>環境</td>
-            <td></td>
-            <td><%= @post.environment.name %></td>
-          </tr>
-          <tr>
-            <td>住所</td>
-            <td></td>
-            <td><%= @post.address %></td>
-          </tr>
-          <tr>
-            <td>経度</td>
-            <td></td>
-            <td><%= @post.longitude %></td>
-          </tr>
-          <tr>
-            <td>緯度</td>
-            <td></td>
-            <td><%= @post.latitude %></td>
-          </tr>
-          <tr>
-            <td>アクセス方法</td>
-            <td></td>
-            <td><%= @post.access %></td>
-          </tr>
-          <tr>
-            <td>周辺設備（スーパーやコンビニなど）</td>
-            <td></td>
-            <td><%= @post.facility %></td>
-          </tr>
-          <tr>
-            <td>野営許可申請先</td>
-            <td></td>
-            <td><%= @post.contact %></td>
-          </tr>
-          <tr>
-            <td>お気に入り</td>
-            <td></td>
-            <td class=<%= "favorite-" + @post.id.to_s %> >
-              <%= render "public/favorites/btn", post: @post %>
             </td>
           </tr>
           <tr>
-            <td>コメント数</td>
-            <td></td>
-            <td class="post-comments-counter">
-              <%= render "public/post_comments/counter", post: @post %>
+            <td colspan="3">
+              <strong>野営地名　：　<%= @post.name %></strong>
             </td>
           </tr>
           <tr>
-            <% if @post.user == current_user %>
-              <td><%= link_to '編集', edit_post_path(@post), class: "btn btn-lg btn-success edit_post_#{@post.id}" %></td>
-              <td><%= link_to '削除', @post, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-lg btn-danger destroy_post_#{@post.id}" %></td>
-            <% end %>
+            <td colspan="3">
+              <%= render "public/posts/static_rate", post: @post %>
+            </td>
           </tr>
-        </table>
+          <tr>
+            <td colspan="3">
+              <strong>説明＆コメント　：　<%= @post.body %></strong>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="3">
+              <strong>都道府県　：　<%= @post.prefecture.name %></strong>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="3">
+              <strong>環境　：　<%= @post.environment.name %></strong>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="3">
+              <strong>住所　：　<%= @post.address %></strong>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="3">
+              <strong>経度　：　<%= @post.longitude %></strong>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="3">
+              <strong>緯度　：　<%= @post.latitude %></strong>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="3">
+              <strong>アクセス方法　：　<%= @post.access %></strong>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="3">
+              <strong>周辺設備（スーパーやコンビニなど）　：　<%= @post.facility %></strong>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="3">
+              <strong>野営許可申請先　：　<%= @post.contact %></strong>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="3" class=<%= "favorite-" + @post.id.to_s %> >
+              <strong><%= render "public/favorites/btn", post: @post %></strong>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="3" class="post-comments-counter">
+              <strong>コメント数　：　<%= render "public/post_comments/counter", post: @post %></strong>
+            </td>
+          </tr>
+        </tbody>
+      </table>
       
-      <div class="post-comments-index">
-        <%= render "public/post_comments/index", post: @post %>
-      </div>
-      
-      <%= render "public/post_comments/form", post: @post, post_comment: @post_comment %>
+      <% if @post.user == current_user %>
+        <%= link_to '編集', edit_post_path(@post), class: "btn btn-lg btn-success edit_post_#{@post.id}" %>
+        <%= link_to '削除', @post, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-lg btn-danger destroy_post_#{@post.id}" %>
+      <% end %>
       
     </div>
   </div>
+  
+  <div class="post-comments-index">
+    <%= render "public/post_comments/index", post: @post %>
+  </div>
+  
+  <div class="row">
+    <div>
+      <h2 class="text-center px-3 py-3">コメント投稿</h2>
+    </div>
+  </div>
+  <%= render "public/post_comments/form", post: @post, post_comment: @post_comment %>
 </div>
