@@ -3,7 +3,7 @@
     <div>
       <div class="image_field">
         <!-- image_tagでプレビューを行うためにscriptから送られてくる要素を(id: "img_prev")で指定、(attached? ? ファイル : ファイル)による真偽で表示を変更-->
-        <%= image_tag (post.images.attached? ? post.images : 'no-image.png'), id: "img_prev", class: "upload_image" %>
+        <%= image_tag (post.images.attached? ? post.images[0] : 'no-image.png'), id: "img_prev", class: "upload_image" %>
         <!-- (multiple: true)で画像を複数投稿、(id: :post_image)でscriptにアップロードしたデータを送る、(accept:'image/*')で全拡張子を許可 -->
         <span class="btn btn-file btn-primary"><%= f.file_field :images, multiple: true, id: :post_image,  accept:'image/*' %>画像選択</span>
         <!-- 投稿画像プレビュー機能用javascript -->
@@ -29,12 +29,6 @@
       </div>
     </div>
     <table>
-      <thead>
-        <tr>
-          <th></th>
-          <th></th>
-        </tr>
-      </thead>
       <tbody>
         <tr>
           <div class="py-3">
@@ -61,7 +55,7 @@
               </script>
           
             <% else %>
-              <%= render "static_rate", post: post %>
+              <%= render "public/posts/static_rate", post: post %>
             <% end %>
           </div>
         </tr>
@@ -71,7 +65,7 @@
         </tr>
         <tr>
           <td><%= f.label :body, "野営地説明＆コメント" %></td>
-          <td class="form-group" colspan="3"><%= f.text_area :body, placeholder: "野営地説明＆コメント", size: 68, class: "textlines-radius"  %></td>
+          <td class="form-group"><%= f.text_area :body, placeholder: "野営地説明＆コメント", size: "100x10", class: "textlines-radius"  %></td>
         </tr>
         <tr>
           <td><%= f.label :prefecture_id, "都道府県" %></td>
@@ -83,7 +77,7 @@
         </tr>
         <tr>
           <td><%= f.label :address, "住所" %></td>
-          <td class="form-group" colspan="3"><%= f.text_area :address, placeholder: "住所", size: 68, class: "textlines-radius" %></td>
+          <td class="form-group"><%= f.text_area :address, placeholder: "住所", size: "50x3", class: "textlines-radius" %></td>
         </tr>
         <tr>
           <td><%= f.label :longitude, "経度" %></td>
@@ -91,19 +85,19 @@
         </tr>
         <tr>
           <td><%= f.label :latitude, "緯度" %></td>
-          <td class="form-group"><%= f.text_field :latitude, placeholder: "緯度", ssize: 25, class: "textlines-radius" %></td>
+          <td class="form-group"><%= f.text_field :latitude, placeholder: "緯度", size: 25, class: "textlines-radius" %></td>
         </tr>
         <tr>
           <td><%= f.label :access, "アクセス方法" %></td>
-          <td class="form-group" colspan="3"><%= f.text_area :access, placeholder: "アクセス方法", size: 68, class: "textlines-radius" %></td>
+          <td class="form-group"><%= f.text_area :access, placeholder: "アクセス方法", size: "50x3", class: "textlines-radius" %></td>
         </tr>
         <tr>
           <td><%= f.label :facility, "周辺設備（スーパーやコンビニなど）" %></td>
-          <td class="form-group"><%= f.text_area :facility, placeholder: "周辺設備（スーパーやコンビニなど）", size: 68, class: "textlines-radius" %></td>
+          <td class="form-group"><%= f.text_area :facility, placeholder: "周辺設備（スーパーやコンビニなど）", size: "25x3", class: "textlines-radius" %></td>
         </tr>
         <tr>
           <td><%= f.label :contact, "野営許可申請先" %></td>
-          <td class="form-group"><%= f.text_area :contact, placeholder: "野営許可申請先", ssize: 25, class: "textlines-radius" %></td>
+          <td class="form-group"><%= f.text_area :contact, placeholder: "野営許可申請先", size: "25x3", class: "textlines-radius" %></td>
         </tr>
       </tbody>
     </table>
