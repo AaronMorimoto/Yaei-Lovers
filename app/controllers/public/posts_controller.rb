@@ -34,7 +34,7 @@ class Public::PostsController < ApplicationController
     if @post.save
       redirect_to post_path(@post), notice: "You have posted successfully."
     else
-      render :new
+      render "new"
     end
   end
   
