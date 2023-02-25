@@ -53,9 +53,18 @@
   text-align: left;
 }
 
+.main-size{
+  min-height: 100vh;
+  position: relative;
+  padding-bottom: 120px;
+  box-sizing: border-box;
+}
+
 .footer {
-  max-width: 100%;
+  width: 100%;
+  text-align: center;
   overflow-x: hidden;
+  bottom: 0;
 }
 
 .comment-box {

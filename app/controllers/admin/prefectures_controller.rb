@@ -10,10 +10,10 @@ class Admin::PrefecturesController < ApplicationController
   def create
     @prefecture = Prefecture.new(prefecture_params)
     if @prefecture.save
-      redirect_to admin_prefectures_path
+      redirect_to admin_prefectures_path, notice: "県名タグの新規登録に成功しました。"
     else
       @prefectures = Prefecture.all
-      render 'index'
+      render 'index', notice: "県名タグの新規登録に失敗しました。"
     end
   end
 
@@ -22,15 +22,15 @@ class Admin::PrefecturesController < ApplicationController
 
   def update
     if @prefecture.update(prefecture_params)
-      redirect_to admin_prefectures_path
+      redirect_to admin_prefectures_path, notice: "県名タグの変更に成功しました。"
     else
-      render "edit"
+      render "edit", notice: "県名タグの変更に失敗しました。"
     end
   end
 
   def destroy
     @prefecture.destroy
-    redirect_to admin_prefectures_path
+    redirect_to admin_prefectures_path, notice: "県名タグの削除に成功しました。"
   end
 
   private
