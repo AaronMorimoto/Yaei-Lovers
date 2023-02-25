@@ -10,10 +10,10 @@ class Admin::EnvironmentsController < ApplicationController
   def create
     @environment = Environment.new(environment_params)
     if @environment.save
-      redirect_to admin_environments_path
+      redirect_to admin_environments_path, notice: "環境タグの新規登録に成功しました。"
     else
       @environments = Environment.all
-      render 'index'
+      render 'index', notice: "環境タグの新規登録に失敗しました。"
     end
   end
 
@@ -22,15 +22,15 @@ class Admin::EnvironmentsController < ApplicationController
 
   def update
     if @environment.update(environment_params)
-      redirect_to admin_environments_path
+      redirect_to admin_environments_path, notice: "環境タグの変更に成功しました。"
     else
-      render "edit"
+      render "edit", notice: "環境タグの変更に失敗しました。"
     end
   end
 
   def destroy
     @environment.destroy
-    redirect_to admin_environments_path
+    redirect_to admin_environments_path, notice: "環境タグの削除に成功しました。"
   end
 
   private

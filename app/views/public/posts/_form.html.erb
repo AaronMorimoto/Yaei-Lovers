@@ -1,4 +1,5 @@
-<%= form_with model:post, url: url do |f| %>
+<%= form_with model: post, url: url do |f| %>
+  <%= render 'layouts/error_messages', resource: post %>
   <div>
     <div>
       <div class="image_field">

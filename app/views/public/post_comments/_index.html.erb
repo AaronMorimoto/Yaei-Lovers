@@ -31,7 +31,7 @@
       <td class="comment-box"><%= post_comment.comment %></td>
       <td>
         <% if post_comment.user == current_user %>
-          <%= link_to "Destroy", post_post_comment_path(post, post_comment), method: :delete, class: "btn btn-danger pull-right", remote: true %>
+          <%= link_to "Destroy", post_post_comment_path(post, post_comment), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-danger pull-right", remote: true %>
         <% end %>
       </td>
     </tr>
