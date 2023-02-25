@@ -5,6 +5,7 @@
   <div class='row'>
     <div class='col'>
       <%= form_with model: @user, url: update_information_path, method: :PATCH do |f| %>
+        <%= render 'layouts/error_messages', resource: user %>
         <h2>会員情報編集</h2>
         <div>
           <%= f.label :profile_image, "会員画像" %>

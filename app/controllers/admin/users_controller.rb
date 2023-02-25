@@ -7,6 +7,7 @@ class Admin::UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
+    @posts = @user.posts
   end
   
   def edit
@@ -16,7 +17,7 @@ class Admin::UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
-      redirect_to admin_users_path(@user), notice: "You have updated user_info successfully."
+      redirect_to admin_users_path(@user), notice: "ユーザー情報の更新に成功しました。"
     else
       render "edit"
     end

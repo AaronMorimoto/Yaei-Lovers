@@ -1,4 +1,5 @@
 <%= form_with(model:[post, post_comment], local: false) do |f| %>
+  <%= render 'layouts/error_messages', resource: post_comment %>
   <div>
     <div class="image_field">
       <%= image_tag (post_comment.images.attached? ? post_comment.images : 'no-image.png'), id: "img_prev", class: "upload_image" %>
@@ -50,6 +51,6 @@
       <% end %>
     </div>
   </div>
-  <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに", class: "w-100 comment-textarea" %>
+  <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに(日本語のみ)", class: "w-100 comment-textarea" %>
   <%= f.submit "投稿", class: "btn btn-lg btn-primary btn-base-1 mt-20 pull-right" %>
 <% end %>

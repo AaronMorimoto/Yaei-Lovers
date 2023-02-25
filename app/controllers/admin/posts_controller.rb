@@ -6,7 +6,7 @@ class Admin::PostsController < ApplicationController
   
   def destroy
     @post.destroy
-    redirect_to admin_root_path
+    redirect_to admin_root_path, notice: "投稿の削除に成功しました。"
   end
   
   private

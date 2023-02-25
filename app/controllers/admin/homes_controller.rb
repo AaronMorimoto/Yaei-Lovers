@@ -1,6 +1,7 @@
 class Admin::HomesController < ApplicationController
   
   def top
+    
     #環境タグでを指定した際の一覧表示
     if params[:environment_id].present? then
       @posts = Post.where(environment_id: "#{params[:environment_id]}")
