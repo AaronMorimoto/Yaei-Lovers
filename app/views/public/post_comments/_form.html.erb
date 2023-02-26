@@ -1,5 +1,4 @@
 <%= form_with(model:[post, post_comment], local: false) do |f| %>
-  <%= render 'layouts/error_messages', resource: post_comment %>
   <div>
     <div class="image_field">
       <%= image_tag (post_comment.images.attached? ? post_comment.images : 'no-image.png'), id: "img_prev", class: "upload_image" %>

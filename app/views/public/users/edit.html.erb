@@ -5,10 +5,10 @@
   <div class='row'>
     <div class='col'>
       <%= form_with model: @user, url: update_information_path, method: :PATCH do |f| %>
-        <%= render 'layouts/error_messages', resource: user %>
-        <h2>会員情報編集</h2>
+        <%= render 'layouts/error_messages', resource: @user %>
+        <h2>ユーザー情報編集</h2>
         <div>
-          <%= f.label :profile_image, "会員画像" %>
+          <%= f.label :profile_image, "ユーザー画像" %>
           <div class="image_field">
             <!-- image_tagでプレビューを行うためにscriptから送られてくる要素を(id: "img_prev")で指定、(attached? ? ファイル : ファイル)による真偽で表示を変更-->
             <%= image_tag (@user.profile_image.attached? ? @user.profile_image : 'no-image.png'), id: "img_prev", class: "user_image" %>
