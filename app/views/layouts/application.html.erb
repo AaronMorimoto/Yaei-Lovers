@@ -6,9 +6,7 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <!--bootstrap導入用ににコメントアウト、後々必要になった時用に念のため残しています。-->
-    <!--#stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'-->
-    
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <!--app/javascript 配下でcssを管理します、必要に応じてapplication.scssにcssを記述、もしくは作成したcssファイルをapplication.jsにinportしてください。-->
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
@@ -16,45 +14,13 @@
   </head>
 
   <body>
-    <header class="<%= (admin_signed_in? ? "admin_header" : "" )%>">
-      <div class = "content">
-        <%= link_to 'Yaei Lovers', (admin_signed_in? ? admin_root_path : root_path ), class: "logo" %>
-          <ul class="flex">
-            <% if admin_signed_in? %>
-              <li><%= link_to 'トップへ', admin_root_path %></li>
-              <li><%= link_to '野営の心得', how_to_path %></li>
-              <li><%= link_to '会員一覧', admin_users_path %></li>
-              <li><%= link_to '環境一覧', admin_environments_path %></li>
-              <li><%= link_to '県名一覧', admin_prefectures_path %></li>
-              <li><%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %></li>
-            <% elsif user_signed_in? %>
-              <li><%= link_to 'トップへ', root_path %></li>
-              <li><%= link_to '野営の心得', how_to_path %></li>
-              <li><%= link_to 'マイページ', mypage_path %></li>
-              <li><%= link_to '新規投稿', new_post_path %></li>
-              <li><%= link_to '野営地一覧', posts_path %></li>
-              <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
-            <% else %>
-              <li><%= link_to 'トップへ', root_path %></li>
-              <li><%= link_to '野営の心得', how_to_path %></li>
-              <li><%= link_to '野営地一覧', posts_path %></li>
-              <li><%= link_to 'ゲストログイン（閲覧用）', user_guest_sign_in_path, method: :post %></li>
-              <li><%= link_to '新規登録', new_user_registration_path %></li>
-              <li><%= link_to 'ログイン', new_user_session_path %></li>
-            <% end %>
-          </ul>
-        <% if admin_signed_in? %>
-          <!-- 新規投稿順に表示する機能 -->
-        <% end %>
-      </div>
-    </header>
-    
+    <%= render 'layouts/header' %>
     <main>
-      <%= yield %>
+      <div class="background_img main-size">
+        <span><%= notice %></span>
+        <%= yield %>
+      </div>
     </main>
-    
-    <footer>
-      © Infratop Inc. All Rights Reserved.
-    </footer>
+    <%= render 'layouts/footer' %>
   </body>
 </html>

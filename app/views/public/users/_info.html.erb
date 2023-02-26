@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="offset-1 text-center">
+    <h2 class="text-center px-3 py-3">
+      <strong>マイページ</strong>
+    </h2>
+  </div>
+</div>
+
+<h3>
+  登録情報
+  <%= link_to "編集する", edit_information_path, class: "btn btn-success" %>
+  <%= link_to "お気に入り一覧", user_favorites_path, class: "btn btn-primary" %>
+</h3>
+<table class='table table-inverse text-light'>
+  <thead>
+    <tr>
+      <th>ユーザー画像</th>
+      <th>ニックネーム</th>
+      <th>メールアドレス</th>
+      <th>登録日</th>
+      <th>更新日</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= image_tag user.get_profile_image, size:'100x100' %></td>
+      <td><%= user.name %></td>
+      <td><%= user.email %></td>
+      <td><%= user.created_at %></td>
+      <td><%= user.updated_at %></td>
+    </tr>
+  </tbody>
+</table>

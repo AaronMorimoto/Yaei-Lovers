@@ -1,4 +1,6 @@
 class Admin::EnvironmentsController < ApplicationController
+  before_action :authenticate_admin!
+  before_action :set_environment, only: [:show, :edit, :update, :destroy]
   
   def index
     @environment = Environment.new
@@ -8,36 +10,37 @@ class Admin::EnvironmentsController < ApplicationController
   def create
     @environment = Environment.new(environment_params)
     if @environment.save
-      redirect_to request.referer
+      redirect_to admin_environments_path, notice: "環境タグの新規登録に成功しました。"
     else
       @environments = Environment.all
-      render 'index'
+      render 'index', notice: "環境タグの新規登録に失敗しました。"
     end
   end
 
   def edit
-    @environment = Environment.find(params[:id])
   end
 
   def update
-    @environment = Environment.find(params[:id])
     if @environment.update(environment_params)
-      redirect_to admin_environments_path
+      redirect_to admin_environments_path, notice: "環境タグの変更に成功しました。"
     else
-      render "edit"
+      render "edit", notice: "環境タグの変更に失敗しました。"
     end
   end
 
   def destroy
-    @environment = Environment.find(params[:id])
     @environment.destroy
-    redirect_to admin_environments_path
+    redirect_to admin_environments_path, notice: "環境タグの削除に成功しました。"
   end
 
   private
 
   def environment_params
     params.require(:environment).permit(:name)
+  end
+  
+  def set_environment
+    @environment = Environment.find(params[:id])
   end
   
 end

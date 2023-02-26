@@ -10,9 +10,10 @@ Rails.application.routes.draw do
     resources :prefectures, except: [:new, :show]
     resources :users, only: [:index, :show, :edit, :update]
     #不適切な投稿削除用
-    resources :posts, only: [:destroy]
-    #不適切なレビューやコメント削除用
-    resources :post_comments, only: [:destroy]
+    resources :posts, only: [:show, :destroy] do
+      #不適切なレビューやコメント削除用
+      resources :post_comments, only: [:destroy]
+    end
   end
 
   devise_for :users, controllers: {
@@ -46,7 +47,7 @@ Rails.application.routes.draw do
     
     resources :posts do
       resources :post_comments, only: [:create, :destroy]
-      resource :favorites, only: [:index, :create, :destroy]
+      resource :favorites, only: [:create, :destroy]
     end
     
   end

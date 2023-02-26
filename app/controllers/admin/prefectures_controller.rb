@@ -1,4 +1,6 @@
 class Admin::PrefecturesController < ApplicationController
+  before_action :authenticate_admin!
+  before_action :set_prefectures, only: [:show, :edit, :update, :destroy]
   
   def index
     @prefecture = Prefecture.new
@@ -8,36 +10,37 @@ class Admin::PrefecturesController < ApplicationController
   def create
     @prefecture = Prefecture.new(prefecture_params)
     if @prefecture.save
-      redirect_to request.referer
+      redirect_to admin_prefectures_path, notice: "県名タグの新規登録に成功しました。"
     else
       @prefectures = Prefecture.all
-      render 'index'
+      render 'index', notice: "県名タグの新規登録に失敗しました。"
     end
   end
 
   def edit
-    @prefecture = Prefecture.find(params[:id])
   end
 
   def update
-    @prefecture = Prefecture.find(params[:id])
     if @prefecture.update(prefecture_params)
-      redirect_to admin_prefectures_path
+      redirect_to admin_prefectures_path, notice: "県名タグの変更に成功しました。"
     else
-      render "edit"
+      render "edit", notice: "県名タグの変更に失敗しました。"
     end
   end
 
   def destroy
-    @prefecture = Prefecture.find(params[:id])
     @prefecture.destroy
-    redirect_to admin_prefectures_path
+    redirect_to admin_prefectures_path, notice: "県名タグの削除に成功しました。"
   end
 
   private
 
   def prefecture_params
     params.require(:prefecture).permit(:name)
+  end
+  
+  def set_prefectures
+    @prefecture = Prefecture.find(params[:id])
   end
   
 end

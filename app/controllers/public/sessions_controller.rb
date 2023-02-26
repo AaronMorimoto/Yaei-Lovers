@@ -49,7 +49,7 @@ class Public::SessionsController < Devise::SessionsController
     return if !@user
     ## 【処理内容2】 取得したアカウントのパスワードと入力されたパスワードが一致してるかを判別
     if @user.valid_password?(params[:user][:password]) && @user.status
-      redirect_to new_user_session_path
+      redirect_to new_user_session_path, notice: "ユーザーの退会に成功しました"
       ## 【処理内容3】falseではなくtrueだった場合にサインアップページにリダイレクトする
     end
   end

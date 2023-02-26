@@ -1,117 +1,14 @@
-<%= form_with model: @post, url: posts_path, method: :POST do |f| %>
-  <div>
-    <div>
-      <%= f.label :images, "画像" %>
-      <div class="image_field">
-        <!-- image_tagでプレビューを行うためにscriptから送られてくる要素を(id: "img_prev")で指定、(attached? ? ファイル : ファイル)による真偽で表示を変更-->
-        <%= image_tag (@post.images.attached? ? @post.images : 'no-image.png'), id: "img_prev", class: "upload_image" %>
-        <!-- (multiple: true)で画像を複数投稿、(id: :post_image)でscriptにアップロードしたデータを送る、(accept:'image/*')で全拡張子を許可 -->
-        <span class="btn btn-file btn-primary"><%= f.file_field :images, multiple: true, id: :post_image,  accept:'image/*' %>画像選択</span>
-        <!-- 投稿画像プレビュー機能用javascript -->
-        <script type="text/javascript">
-          $(function() {
-            function readURL(input) {
-              if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                  $('#img_prev').attr('src', e.target.result);
-                }
-                reader.readAsDataURL(input.files[0]);
-              }
-            }
-            $("#post_image").change(function(){
-              readURL(this);
-            });
-          });
-        </script>
-        
-        <p>選択するとプレビューされます。<br>画像未選択のままだと、<br>「画像準備中」になります。</p>
-        
-      </div>
+<div class='container px-5 px-sm-0  form-box'>
+  <div class="row">
+    <div class="offset-1 text-center">
+      <h2 class="text-center px-3 py-3">
+        <strong>新規投稿</strong>
+      </h2>
     </div>
-    <table>
-      <thead>
-        <tr>
-          <th></th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <% if @post.id === nil %>
-            <div class="form-group" id="star">
-              <%= f.label :rate %>
-              <%= f.hidden_field :rate, id: :review_star, class:'form-control' %>
-            </div>
-            <!-- 評価javascript -->
-            <div id="post_raty"></div>
-            
-            <script>
-              // scriptファイルをどのidの部分に配置するかを指定
-              $(document).on('turbolinks:load', function() {
-              let raty_elem = document.querySelector('#post_raty');
-              raty_elem.innerHTML = ""
-              let option = {  //星画像の指定などのオプションをここに記述,
-                  starOn: "<%= asset_path('star-on.png') %>",
-                  starOff: "<%= asset_path('star-off.png') %>",
-                  starHalf: "<%= asset_path('star-half.png') %>",
-                  scoreName: 'post[rate]',
-                };
-              raty(raty_elem,option);
-              });
-            </script>
-          
-          <% else %>
-            <%= render "static_rate", post: @post %>
-          <% end %>
-        </tr>
-        <tr>
-          <td><%= f.label :name, "野営地名" %></td>
-          <td class="form-group"><%= f.text_field :name, placeholder: "野営地名", size: 25, class: "textlines-radius"  %></td>
-        </tr>
-        <tr>
-          <td><%= f.label :body, "野営地説明＆コメント" %></td>
-          <td class="form-group" colspan="3"><%= f.text_area :body, placeholder: "野営地説明＆コメント", size: 68, class: "textlines-radius"  %></td>
-        </tr>
-        <tr>
-          <td><%= f.label :prefecture_id, "都道府県" %></td>
-          <td class="select_field"><%= f.collection_select :prefecture_id, Prefecture.all, :id, :name %></td>
-        </tr>
-        <tr>
-          <td><%= f.label :environment_id, "環境" %></td>
-          <td class="select_field"><%= f.collection_select :environment_id, Environment.all, :id, :name %></td>
-        </tr>
-        <tr>
-          <td><%= f.label :address, "住所" %></td>
-          <td class="form-group" colspan="3"><%= f.text_area :address, placeholder: "住所", size: 68, class: "textlines-radius" %></td>
-        </tr>
-        <tr>
-          <td><%= f.label :longitude, "経度" %></td>
-          <td class="form-group"><%= f.text_field :longitude, placeholder: "経度", size: 25, class: "textlines-radius" %></td>
-        </tr>
-        <tr>
-          <td><%= f.label :latitude, "緯度" %></td>
-          <td class="form-group"><%= f.text_field :latitude, placeholder: "緯度", ssize: 25, class: "textlines-radius" %></td>
-        </tr>
-        <tr>
-          <td><%= f.label :access, "アクセス方法" %></td>
-          <td class="form-group" colspan="3"><%= f.text_area :access, placeholder: "アクセス方法", size: 68, class: "textlines-radius" %></td>
-        </tr>
-        <tr>
-          <td><%= f.label :facility, "周辺設備（スーパーやコンビニなど）" %></td>
-          <td class="form-group"><%= f.text_area :facility, placeholder: "周辺設備（スーパーやコンビニなど）", size: 68, class: "textlines-radius" %></td>
-        </tr>
-        <tr>
-          <td><%= f.label :contact, "野営許可申請先" %></td>
-          <td class="form-group"><%= f.text_area :contact, placeholder: "野営許可申請先", ssize: 25, class: "textlines-radius" %></td>
-        </tr>
-      </tbody>
-    </table>
-    
-    <div class="flex align-center pl5">
-      <%= f.submit "投稿", class: "btn btn-primary" %>
-    </div>
-    
   </div>
-
-<% end %>
+  <div class='row'>
+    <div class='col'>
+      <%= render 'public/posts/form', post: @post, url: posts_path, submit: '投稿' %>
+    </div>
+  </div>
+</div>

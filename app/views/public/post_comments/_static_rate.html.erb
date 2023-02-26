@@ -1,0 +1,15 @@
+<div id="rate_<%= post_comment.id %>"></div>
+<script>
+$(document).on('turbolinks:load', function() {
+    let raty_<%= post_comment.id %> = document.querySelector('#rate_<%= post_comment.id %>');
+    rate_<%= post_comment.id %>.innerHTML = ""
+    let option_<%= post_comment.id %> = {  
+        starOn: "<%= asset_path('star-on.png') %>",
+        starOff: "<%= asset_path('star-off.png') %>",
+        starHalf: "<%= asset_path('star-half.png') %>",
+        score: "<%= post_comment.rate %>",
+        readOnly: true,
+      };
+    raty(raty_<%= post_comment.id %> ,option_<%= post_comment.id %>);
+});
+</script>

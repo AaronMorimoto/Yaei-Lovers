@@ -1,4 +1,20 @@
-<section class="inner">
-  <h2 class="section-ttl">環境タグ編集</h2>
-  <%= render 'form', environment: @environment, url: admin_environment_path(@environment), method: :PATCH, submit: '更新' %>
-</section>
+<div class='container px-5 px-sm-0  form-box'>
+  <div class="row">
+    <div class="offset-1 text-center">
+      <h2 class="text-center px-3 py-3">
+        <strong>環境タグ編集</strong>
+      </h2>
+    </div>
+  </div>
+  <div class='row'>
+    <div class='col'>
+      <div class="mb-3">
+        <section class="inner">
+          <% if admin_signed_in? %>
+            <%= render 'admin/environments/form', environment: @environment, url: admin_environment_path(@environment), method: :PATCH, submit: '更新' %>
+          <% end %>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>

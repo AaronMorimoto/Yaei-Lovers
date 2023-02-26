@@ -1,2 +1,205 @@
-<h1>Public::Homes#how_to</h1>
-<p>Find me in app/views/public/homes/how_to.html.erb</p>
+<div class='container px-5 px-sm-0  form-box'>
+    <div class="text-center">
+      <h1 class="px-3 py-3">
+        <strong>野営の心得</strong>
+      </h1>
+    </div>
+  <div class='row'>
+    <div class='col'>
+      
+      <table class="table border bg-light pb-3 how-to-table">
+        <thead>
+          <tr>
+            <th class="text-center">目次</th>
+          </tr>
+        </thead>
+        <tbody class="borderless">
+          <tr>
+            <td>➀野営地の選び方、注意点</td>
+          </tr>
+          <tr>
+            <td>➁野営時に守るべきマナー</td>
+          </tr>
+          <tr>
+            <td>最後に</td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <table class="table border bg-light py-3 how-to-table">
+        <thead>
+          <tr>
+            <th class="text-center">➀野営地の選び方、注意点</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div class="mx-auto text-center">
+                <%= image_tag 'yaei-tent.jpg', size: '470x250' %>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <strong>まず、野営地の選び方ですが、危険地を避けることが第一</strong>
+            </td>
+          </tr>
+          <tr>
+            <td class="text-left">
+              　具体例として、雨天の場合は水辺や山での野営は避けましょう。</br>
+              よくニュースでも見ますが、雨天の際は、川や海は急激な増水の危険性、山は地滑りが起きる可能性があり、野営開始時は問題なくとも気が付いた時には手遅れという場合もあります。
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="mx-auto text-center">
+                <%= image_tag 'flood.jpg', size: '470x250' %>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td class="text-left">
+              　他には、山や森で野営を行う場合、余裕があれば付近の警察や役所に熊や猪などの獣の目撃情報が直近であったかなど事前に確認を行い、目撃されている場合はその付近での野営は避けましょう。100%安全とはいきませんが、遭遇する可能性をぐっと下げることが出来ます。
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="mx-auto text-center">
+                <%= image_tag 'bear.jpg', size: '470x250' %>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <table class="table border bg-light py-3 how-to-table">
+        <thead>
+          <tr>
+            <th class="text-center">➁野営時に守るべきマナー</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div class="mx-auto text-center">
+                <%= image_tag 'manners.jpg', size: '470x250' %>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <strong>野営地使用前にはその場所の使用許可を取る</strong>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              私有地の場合
+            </td>
+          </tr>
+          <tr>
+            <td class="text-left">
+              　無断で野営すれば土地の無断使用・不法侵入にあたる為、必ず所有者に許可を取りましょう。所有者が不明な場合は、絶対に使用・侵入してはいけません。
+            </td>
+          </tr>
+          <tr>
+            <td>
+              公有地の場合
+            </td>
+          </tr>
+          <tr>
+            <td class="text-left">
+              　山や森林であれば、森林管理署（林野庁の地方機関）が国有林や国有原野として土地を管理しているので、その地域を管轄する森林管理署に問い合わせれば、許可の申請先とどこが国有林にあたるのか教えてもらえます。
+            </td>
+          </tr>
+          <tr>
+            <td class="text-left">
+              　水辺（海、川）の場合、日本の河原は、河川法という法律で基本的には、誰もが自由に使ってよいことに定められています。
+              管理者である自治体が条例で野営（キャンプ）や火気の使用を禁じている場合は注意が必要だが、そうでなければ、野営しても問題はありません。
+              海辺も同様で、特に海水浴シーズン以外の、人気の無い浜辺など他人の迷惑にならない場所であれば問題はありません。</br>
+              　ただし、“➀野営地の選び方、注意点”でも述べたように、雨天の水辺などは危険地帯となる為、注意しましょう。
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="mx-auto text-center">
+                <%= image_tag 'trespass.jpg', size: '470x250' %>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <strong>付近の住民に迷惑をかけない</strong>
+            </td>
+          </tr>
+          <tr>
+            <td class="text-left">
+              　人家の近くで野営すると、音がうるさかったり、焚火の煙が迷惑となる可能性があるので、野営地を決める際はなるべく離れて迷惑にならない場所にして、
+              大人数で大騒ぎするなどの迷惑行為は控えましょう。
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="mx-auto text-center">
+                <%= image_tag 'urusai.jpeg', size: '470x250' %>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <strong>野営時のゴミは持ち帰る</strong>
+            </td>
+          </tr>
+          <tr>
+            <td class="text-left">
+              　これは基本であり、当然のマナーですが、野営時に出るゴミは責任をもって持って帰りましょう。
+              　これが出来ない（やらない）ために、公共の場所での野営が規制されていく原因となっています。
+              例として、河川敷などでBBQ後にゴミが放置された為、その後BBQや野営（キャンプ）が禁止になった事や、
+              焚き火痕の未消火の炭が原因で火災が起きた、などといった例もあります。</br>
+              　これらの事は地元住民のの迷惑となり、結果的に禁止条例が設けられることにつながってしまう為、消火・ゴミの処理は忘れず行いましょう。
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="mx-auto text-center">
+                <%= image_tag 'poisute.jpg', size: '470x250' %>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="mx-auto text-center">
+                <%= image_tag 'charcoal.jpg', size: '470x250' %>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <table class="table border bg-light py-3 how-to-table">
+        <thead>
+          <tr>
+            <th class="text-center">最後に</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div class="mx-auto text-center">
+                <%= image_tag 'river-beauliful.jpg', size: '470x250' %>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td class="text-left">
+              　野営は、人の手が行き届いたキャンプ場よりも自然をより身近に感じられる魅力がありますが、
+              同時に、危険性が高く、自己責任な部分が多いアクティビティです。</br>
+              　自由に野営を楽しむ為にも、事前準備と調査をしっかりとした上で、地元の方々の迷惑にならないようルールを守りながら、お気に入りの野営地を見つけていきましょう。
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      
+    </div>
+  </div>
+</div>
