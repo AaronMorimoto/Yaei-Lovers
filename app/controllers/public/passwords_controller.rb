@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Public::PasswordsController < Devise::PasswordsController
+  before_action :confirm_guest_user, only: [:create]
   # GET /resource/password/new
   # def new
   #   super
@@ -23,6 +24,14 @@ class Public::PasswordsController < Devise::PasswordsController
 
   # protected
 
+  #ゲストのパスワード再設定メールの送信回避用
+  def confirm_guest_user
+    #変更しようとしているパスワードのメールアドレスを参照してゲストユーザーであればログイン画面へ移動
+    if params[:user][:email] == 'guest@example.com'
+      redirect_to new_user_session_path, alert: 'ゲストユーザーのパスワード再設定はできません。'
+    end
+  end
+  
   # def after_resetting_password_path_for(resource)
   #   super(resource)
   # end

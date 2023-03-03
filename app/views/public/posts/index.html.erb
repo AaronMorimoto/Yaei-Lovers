@@ -1,34 +1,11 @@
-<table class='table table-hover table-inverse'>
-  <thead>
-    <tr>
-      <th></th>
-      <th>野営地名</th>
-      <th>評価</th>
-      <th>都道府県</th>
-      <th>環境</th>
-      <th>お気に入り</th>
-      <th>コメント</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @posts.each do |post| %>
-      <tr>
-        <td>
-          <%= link_to post_path(post) do %>
-            <% post.images.each do |image| %>
-              <%= image_tag(image, size:'50x50') %>
-            <% end %>
-          <% end %>
-        </td>
-        <td><%= link_to post.name, post_path(post), class: "post_#{post.id}" %></td>
-        <td><%= render "static_rate", post: post %></td>
-        <td><%= post.prefecture_id %></td>
-        <td><%= post.environment_id %></td>
-        <td class=<%= "favorite-" + post.id.to_s %> >
-            <%= render "public/favorites/btn", post: post %>
-        </td>
-        <td><%= render "public/post_comments/counter", post: post %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class='container px-5 px-sm-0'>
+  <div class='row'>
+    <div class='col-md-3'>
+      <%= render "layouts/search", post: @post %>
+      <%= render "layouts/rule" %>
+    </div>
+    <div class='col-md-8 offset-md-1'>
+      <%= render "public/posts/index", posts: @posts %>
+    </div>
+  </div>
+</div>

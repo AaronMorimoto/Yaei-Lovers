@@ -1,26 +1,41 @@
-<section class="inner">
-  <h2 class="section-ttl">県名タグ管理</h2>
-  <div class="mb3">
-    <h3>県名タグ新規登録</h3>
-    <%= render 'form', prefecture: @prefecture, url: admin_prefectures_path, method: :POST, submit: '登録' %>
+<div class='container px-5 px-sm-0  form-box'>
+  <div class="row">
+    <div class="offset-1 text-center">
+      <h2 class="text-center px-3 py-3">
+        <strong>県名タグ管理</strong>
+      </h2>
+    </div>
   </div>
-  <div class="mb3">
-    <h3>環境一覧</h3>
-    <table class="prefecture_info has_border">
-      <thead>
-        <tr>
-          <th>県名</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @prefectures.each do |prefecture| %>
-          <tr>
-            <td><%= link_to prefecture.name, posts_path(prefecture_id: prefecture.id), class: "underline" %></td>
-            <td class="text-center"><%= link_to "編集", edit_admin_prefecture_path(prefecture), class: "btn btn-success" %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+  <div class='row'>
+    <div class='col'>
+      <div class="mb-3">
+        <h3>県名タグ新規登録</h3>
+        <%= render 'form', prefecture: @prefecture, url: admin_prefectures_path, method: :POST, submit: '登録' %>
+      </div>
+      <div class="pt-3">
+        <h3>県名一覧</h3>
+        <table class="table table-hover table-inverse bg-light has_border">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>県名</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @prefectures.each do |prefecture| %>
+              <tr>
+                <td><%= prefecture.id %></td>
+                <td><%= link_to prefecture.name, admin_root_path(prefecture_id: prefecture.id), class: "underline" %></td>
+              <% if admin_signed_in? %>
+                <td class="text-center"><%= link_to "編集", edit_admin_prefecture_path(prefecture), class: "btn btn-success" %></td>
+                <td class="text-center"><%= link_to '削除', admin_prefecture_path(prefecture), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-danger" %></td>
+              <% end %>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
-</section>
+</div>

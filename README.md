@@ -1,4 +1,4 @@
-#Yaei-Lovers
+# Yaei-Lovers
 
 ## サイト概要
 ### サイトテーマ
@@ -16,6 +16,10 @@
 新しい野営に適した場所の検索したい時、自分の試してみた野営地の共有する時、投稿されていた野営地を試した際のレビュー
 
 ## 設計書
+- ER図：https://drive.google.com/file/d/1Kd0T0OM9rzFtiv3-6tqFovqeuah6LPq_/view?usp=sharing
+- テーブル定義書：https://docs.google.com/spreadsheets/d/1cHS8436U6eq8NHlyuk2-HvIII9dnX54bu6-yKAcegwE/edit?usp=sharing
+- アプリケーション詳細設計：https://docs.google.com/spreadsheets/d/1a9Hfq9Ch_P8VazWXsAzfpSuvcgrwADHCdrR9JBkRN2g/edit?usp=sharing
+- テスト仕様書：https://docs.google.com/spreadsheets/d/1tYgGOEsw3gmZebuqSnqpy_MHWsOyWy9t/edit?usp=sharing&ouid=106516889664391115902&rtpof=true&sd=true
 
 ## 開発環境
 - OS：Linux(CentOS)

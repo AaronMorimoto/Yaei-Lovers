@@ -1,20 +1,33 @@
-<table>
+<div class="row">
+  <div>
+    <h2 class="text-center px-3 py-3">コメント一覧</h2>
+  </div>
+</div>
+<table class='comment-table table table-inverse text-light'>
+  <thead>
+    <tr>
+      <th>画像</th>
+      <th>評価</th>
+      <th>説明＆コメント</th>
+      <th></th>
+    </tr>
+  </thead>
   <tbody>
-      <% post.post_comments.each do |post_comment| %>
-      <tr>
-        <td>
-          <%= link_to mypage_path(post_comment.user) do %>
-            <%= image_tag post_comment.user.get_profile_image, size: "100x100" %><br>
-            <%= post_comment.user.name %>
-          <% end %>
-        </td>
-        <td><%= post_comment.comment %></td>
-        <td>
-          <% if post_comment.user == current_user %>
-            <%= link_to "Destroy", post_post_comment_path(post, post_comment), method: :delete, class: "btn btn-danger pull-right", remote: true %>
-          <% end %>
-        </td>
-      </tr>
-      <% end %>
+  <% post.post_comments.each do |post_comment| %>
+    <tr>
+      <td>
+        <% post_comment.images.each do |image| %>
+          <%= image_tag(image, size:'100x100') %>
+        <% end %>
+      </td>
+      <td class="star"><%= render "public/post_comments/static_rate", post_comment: post_comment %></td>
+      <td class="comment-box"><%= post_comment.comment %></td>
+      <td>
+        <% if post_comment.user == current_user %>
+          <%= link_to "Destroy", post_post_comment_path(post, post_comment), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-danger pull-right", remote: true %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
   </tbody>
 </table>

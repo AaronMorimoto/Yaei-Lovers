@@ -10,16 +10,22 @@ class Public::UsersController < ApplicationController
   end
 
   def update
-    if @user.update(user_params)
-      redirect_to mypage_path(@user), notice: "You have updated user_info successfully."
+    #ゲストユーザーの更新、updateアクションの動作前に，メールアドレスがゲストユーザー用であるかチェックするように設定しています。
+    if @user.email == 'guest@example.com'
+      redirect_to mypage_path, notice: "ゲストユーザーは更新できません"
+    elsif @user.update(user_params)
+      redirect_to mypage_path(@user), notice: "ユーザー情報の更新に成功しました。"
     else
-      render "edit"
+      render "edit", notice: "ユーザー情報の更新に失敗しました。"
     end
   end
   
   #お気に入り一覧画面用アクション
   def favorites
-    
+    @posts = @user.posts
+    #favoriteモデルからwhereメソッドとpluckメソッドを使ってログイン中のuser_idとpost_idを引っ張っててfavoritesに代入しています。
+    favorites = Favorite.where(user_id: current_user.id).pluck(:post_id)
+    @favorite_index = Post.find(favorites)
   end
   
   #退会確認画面用アクション
@@ -28,9 +34,14 @@ class Public::UsersController < ApplicationController
   
   #退会用アクション
   def withdraw
-    @user.update(status: true)
-    reset_session
-    redirect_to root_path
+    #ゲストユーザーの退会、withdrawアクションの動作前に，メールアドレスがゲストユーザー用であるかチェックするように設定しています。
+    if @user.email == 'guest@example.com'
+      redirect_to mypage_path, notice: "ゲストユーザーは退会できません。"
+    else
+      @user.update(status: true)
+      reset_session
+      redirect_to root_path, notice: "ユーザーの退会に成功しました。"
+    end
   end
   
   private

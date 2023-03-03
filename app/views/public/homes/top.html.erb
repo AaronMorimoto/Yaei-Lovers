@@ -1,2 +1,12 @@
-<h1>Public::Homes#top</h1>
-<p>Find me in app/views/public/homes/top.html.erb</p>
+<div class='container px-5 px-sm-0'>
+  <div class='row'>
+    <div class='col-md-3'>
+      <!--絞り込み検索フォーム-->
+      <%= render "layouts/search", post: @post %>
+      <%= render "layouts/rule" %>
+    </div>
+    <div class='col-md-8 offset-md-1'>
+      <%= render "public/posts/index", posts: @posts %>
+    </div>
+  </div>
+</div>

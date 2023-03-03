@@ -3,7 +3,15 @@ class Public::PostsController < ApplicationController
   before_action :ensure_correct_user, only: [:edit, :update, :destroy]
   
   def index
-    @posts = Post.all
+    #絞り込み検索用に記述
+    if params[:environment_id].present?
+       params[:prefecture_id].present?
+       #params[:rate].present?
+      @posts = Post.where(environment_id: "#{params[:environment_id]}", prefecture_id: "#{params[:prefecture_id]}")
+      #@posts = Post.where(environment_id: "#{params[:environment_id]}", prefecture_id: "#{params[:prefecture_id]}", rate: "#{params[:rate]}")
+    else
+      @posts = Post.all
+    end
   end
 
   def show
@@ -24,23 +32,23 @@ class Public::PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user_id = current_user.id
     if @post.save
-      redirect_to post_path(@post), notice: "You have posted successfully."
+      redirect_to post_path(@post), notice: "新規投稿に成功しました。"
     else
-      render :new
+      render "new", notice: "新規投稿に失敗しました。"
     end
   end
   
   def update
     if @post.update(post_params)
-      redirect_to post_path(@post), notice: "You have updated your post successfully."
+      redirect_to post_path(@post), notice: "投稿の変更に成功しました"
     else
-      render "edit"
+      render "edit", notice: "投稿の変更に失敗しました。"
     end
   end
   
   def destroy
     @post.destroy
-    redirect_to posts_path
+    redirect_to posts_path, notice: "投稿の削除に成功しました。"
   end
   
   

@@ -3,6 +3,11 @@
 //fortawesomeの導入
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
 
+*{
+  margin: 0;
+  padding: 0;
+}
+
 .image_field {
   width: 220px;
   text-align: center;
@@ -41,4 +46,41 @@
   height: 150px;
 
   object-fit: cover;
+}
+
+.logo {
+  width: 200px;
+  text-align: left;
+}
+
+.main-size{
+  min-height: 100vh;
+  position: relative;
+  padding-bottom: 120px;
+  box-sizing: border-box;
+}
+
+.footer {
+  width: 100%;
+  text-align: center;
+  overflow-x: hidden;
+  bottom: 0;
+}
+
+.comment-box {
+  width: 375px;
+}
+
+.star {
+  width: 175px;
+}
+
+.form-box {
+  width: fit-content;
+  margin: auto;
+}
+
+.how-to-table {
+  width: 500px;
+  text-align: center;
 }

@@ -1,0 +1,38 @@
+<div class="row">
+  <div>
+    <h2 class="text-center px-3 py-3">コメント一覧</h2>
+  </div>
+</div>
+<table class='comment-table table table-inverse text-light'>
+  <thead>
+    <tr>
+      <th>ユーザー</th>
+      <th>画像</th>
+      <th>説明＆コメント</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  <% post.post_comments.each do |post_comment| %>
+    <tr>
+      <td class="text-light">
+        <%= link_to admin_user_path(post_comment.user), class: "text-light" do %>
+          <%= image_tag post_comment.user.get_profile_image, size: "75x75" %><br>
+          <%= post_comment.user.name %>
+        <% end %>
+      </td>
+      <td>
+        <% post_comment.images.each do |image| %>
+          <%= image_tag(image, size:'100x100') %>
+        <% end %>
+      </td>
+      <td class="comment-box"><%= post_comment.comment %></td>
+      <td>
+        <% if admin_signed_in? %>
+          <%= link_to "Destroy", admin_post_post_comment_path(post, post_comment), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-danger pull-right", remote: true %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

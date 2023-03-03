@@ -1,0 +1,37 @@
+<h3>
+  <%= user.name%>さんの投稿一覧
+</h3>
+<table class='table table-inverse text-light'>
+  <thead>
+    <tr>
+      <th>画像</th>
+      <th>野営地名</th>
+      <th>評価</th>
+      <th>都道府県</th>
+      <th>環境</th>
+      <th>お気に入り</th>
+      <th>コメント</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% posts.each do |post| %>
+      <tr>
+        <td>
+          <%= link_to post_path(post) do %>
+            <% post.images.each do |image| %>
+              <%= image_tag(image, size:'50x50') %>
+            <% end %>
+          <% end %>
+        </td>
+        <td><%= link_to post.name, post_path(post), class: "text-light" %></td>
+        <td><%= render "public/posts/static_rate", post: post %></td>
+        <td><%= post.prefecture.name %></td>
+        <td><%= post.environment.name %></td>
+        <td class=<%= "favorite-" + post.id.to_s %> >
+            <%= render "public/favorites/btn", post: post %>
+        </td>
+        <td><%= render "public/post_comments/counter", post: post %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

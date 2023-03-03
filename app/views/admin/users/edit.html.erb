@@ -1,2 +1,54 @@
-<h1>Admin::Users#edit</h1>
-<p>Find me in app/views/admin/users/edit.html.erb</p>
+<div class='container px-5 px-sm-0  form-box'>
+  <div class="row">
+    <div class="offset-1 text-center">
+      <h2 class="text-center px-3 py-3">
+        <strong><%= @user.name %>さんの会員情報編集</strong>
+      </h2>
+    </div>
+  </div>
+  <div class='row'>
+    <div class='col'>
+      <%= form_with model:@user, url: admin_user_path(@user), method: :patch do |f| %>
+        <%= render 'layouts/error_messages', resource: @user %>
+        <table class="table table-hover table-inverse bg-light">
+          <tbody>
+            <tr>
+              <td>
+                <strong>ユーザー画像</strong>
+              </td>
+              <td><%= image_tag @user.get_profile_image, size:'100x100' %></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>ユーザーネーム</strong>
+              </td>
+              <td><%= f.text_field :name, placeholder: "ユーザーネーム", size: 25, class: "textlines-radius" %></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>メールアドレス</strong>
+              </td>
+              <td><%= f.text_field :email, placeholder: "メールアドレス", size: 25, class: "textlines-radius" %></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>ステータス</strong>
+              </td>
+              <td>
+                <%= f.radio_button :status, "false" %>
+                <%= f.label :status_false, "有効" %>
+              </td>
+              <td>
+                <%= f.radio_button :status, "true" %>
+                <%= f.label :status_true, "退会" %>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="form-group">
+          <%= f.submit '変更を保存', class: "btn btn-success" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

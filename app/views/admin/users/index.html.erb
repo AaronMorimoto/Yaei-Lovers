@@ -1,2 +1,18 @@
-<h1>Admin::Users#index</h1>
-<p>Find me in app/views/admin/users/index.html.erb</p>
+<div class='container px-5 px-sm-0  form-box'>
+  <div class="row">
+    <div class="offset-1 text-center">
+      <h2 class="text-center px-3 py-3">
+        <strong>会員一覧</strong>
+      </h2>
+    </div>
+  </div>
+  <div class='row'>
+    <div class='col'>
+      <% if @users.exists? %>
+        <%= render "admin/users/index", users: @users %>
+      <% else %>
+        <h3>ユーザーがいません。</h3>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -8,6 +8,6 @@
 
 #アドミンの簡易ログイン用
 Admin.create!(
-  email: "a@a",
-  password: "aaaaaa"
+  email: "z@z",
+  password: "zzzzzz"
 )

@@ -10,19 +10,26 @@ Rails.application.routes.draw do
     resources :prefectures, except: [:new, :show]
     resources :users, only: [:index, :show, :edit, :update]
     #不適切な投稿削除用
-    resources :posts, only: [:destroy]
-    #不適切なレビューやコメント削除用
-    resources :post_comments, only: [:destroy]
+    resources :posts, only: [:show, :destroy] do
+      #不適切なレビューやコメント削除用
+      resources :post_comments, only: [:destroy]
+    end
   end
 
   devise_for :users, controllers: {
     registrations: 'public/registrations',
     sessions: 'public/sessions',
+    passwords: 'puclic/passwords',
   }
   
   scope module: :public do
     root to: "homes#top"
     get "how_to" => "homes#how_to"
+    
+    devise_scope :user do
+      #ゲストログイン用ルート
+      post 'user/guest_sign_in' => 'sessions#guest_sign_in'
+    end
     
     ##urlにidが含まれないようにuserはそれぞれurlを指定しています。
     #会員マイページ
@@ -37,6 +44,8 @@ Rails.application.routes.draw do
     get 'users/confirm_withdraw' => 'users#confirm_withdraw', as: 'confirm_withdraw'
     #退会アクション
     patch 'users/withdraw' => 'users#withdraw', as: 'withdraw_user'
+    
+    resources :maps, only: [:index]
     
     resources :posts do
       resources :post_comments, only: [:create, :destroy]

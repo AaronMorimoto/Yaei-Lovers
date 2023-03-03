@@ -2,7 +2,7 @@
 
 class Public::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
-  before_action :customer_state, only: [:create]
+  before_action :user_state, only: [:create]
 
   # GET /resource/sign_in
   # def new
@@ -34,14 +34,22 @@ class Public::SessionsController < Devise::SessionsController
     root_path
   end
   
-  def customer_state
+  #ゲストログイン用アクション
+  def guest_sign_in
+    user = User.guest
+    sign_in user
+    redirect_to root_path, notice: 'ゲストユーザーとしてログインしました。'
+  end
+  
+  #会員ステータス更新用（退会用）アクション
+  def user_state
     ## 【処理内容1】 入力されたemailからアカウントを1件取得
     @user = User.find_by(email: params[:user][:email])
     ## アカウントを取得できなかった場合、このメソッドを終了する
     return if !@user
     ## 【処理内容2】 取得したアカウントのパスワードと入力されたパスワードが一致してるかを判別
     if @user.valid_password?(params[:user][:password]) && @user.status
-      redirect_to new_user_session_path
+      redirect_to new_user_session_path, notice: "ユーザーの退会に成功しました"
       ## 【処理内容3】falseではなくtrueだった場合にサインアップページにリダイレクトする
     end
   end
