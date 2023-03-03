@@ -62,4 +62,5 @@ function codeAddress(){
 }
 
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFr0FeFnYQYnoIy8alr7jcTlxXhty-Si8&callback=initMap" async defer></script>
+<!--Google Mapの表示用（APIキーは.envファイルから引っ張って使用）-->
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['MAP_API_KEY']%>&callback=initMap" async defer></script>
