@@ -9,8 +9,8 @@ class Post < ApplicationRecord
   validates :name, presence: true
   validates :body, presence: true, length: { maximum: 500 }
   validates :address, presence: true
-  validates :longitude, presence: true, length: { minimum: 5, maximum: 11 }
-  validates :latitude, presence: true, length: { minimum: 5, maximum: 11 }
+  validates :longitude, presence: true, length: { minimum: 5, maximum: 21 }
+  validates :latitude, presence: true, length: { minimum: 5, maximum: 21 }
   validates :access, presence: true, length: { maximum: 200 }
   validates :facility, presence: true, length: { maximum: 50 }
   validates :contact, presence: true, length: { maximum: 50 }

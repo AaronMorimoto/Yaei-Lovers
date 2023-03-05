@@ -81,6 +81,105 @@
           <td class="form-group"><%= f.text_area :address, placeholder: "住所", size: "50x3", class: "textlines-radius" %></td>
         </tr>
         <tr>
+          
+            <div>
+              <h2>地図</h2>
+            
+              <div class="form-group">
+                <%= f.label :address, "住所" %>
+                <%= f.text_field :address %>
+              </div>
+              
+              <div class="form-group">
+                <!-- buttonをクリックしたらcodeAddressを実行-->
+                <input type="button" value="住所検索" onclick="codeAddress()">
+                <div class="row">
+                  <div class="col-sm-3">
+                    <div id="map"></div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-sm-3">
+                    <%= f.label :latitude, "緯度" %>
+                    <%= f.text_field :latitude %>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-sm-3">
+                    <%= f.label :longitude, "経度"%>
+                    <%= f.text_field :longitude %>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <!--google map用のscript-->
+              <script>
+                let map
+                let geocoder
+                let marker
+                let centercoord
+                
+                function initMap(){
+                  geocoder = new google.maps.Geocoder()
+                  
+                  // 数値が入っていないとマップが非表示になってしまうためnilの場合は東京駅の座標を指定
+                  // contollerで登録済みの緯度と経度を変数に入れて渡す
+                  centercoord = {lat: <%= @latitude || 35.6809591 %>, lng: <%= @longitude || 139.7673068 %>};
+                  
+                  map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 14,
+                    center: centercoord
+                  });
+                  
+                  marker = new google.maps.Marker({
+                    position: centercoord,
+                    map: map,
+                    draggable: true   // ドラッグ可能にする
+                  });
+                  
+                   // マーカーのドロップ（ドラッグ終了）時のイベント
+                  google.maps.event.addListener( marker, 'dragend', function(ev){
+                    // イベントの引数evの、プロパティ.latLngが緯度経度。
+                    document.getElementById('latitude').value = ev.latLng.lat();
+                    document.getElementById('longitude').value = ev.latLng.lng();
+                  });
+                }
+                
+                function codeAddress(){
+                  // 入力された住所を取得
+                  let inputAddress = document.getElementById('address').value;
+                  
+                  // geocodingしたあとmapを移動
+                  geocoder.geocode( { 'address': inputAddress}, function(results, status) {
+                    if (status == 'OK') {
+                      centercoord = results[0].geometry.location;
+                      
+                      // map.setCenterで地図が移動
+                      // google.maps.MarkerでGoogleMap上の指定位置にマーカが立つ
+                      map.setCenter(centercoord);
+                      marker.setPosition(centercoord);
+                      document.getElementById('latitude').value = centercoord.lat();
+                      document.getElementById('longitude').value = centercoord.lng();
+                    }
+                    else {
+                      alert('該当の住所が見つかりませんでした');
+                    }
+                  });
+                }
+              </script>
+              
+              <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['MAP_API_KEY']%>&callback=initMap" async defer></script>
+            </div>
+            
+        </tr>
+        <tr>
           <td><%= f.label :longitude, "経度" %></td>
           <td class="form-group"><%= f.text_field :longitude, placeholder: "経度", size: 25, class: "textlines-radius" %></td>
         </tr>
@@ -108,5 +207,4 @@
     </div>
     
   </div>
-
 <% end %>
