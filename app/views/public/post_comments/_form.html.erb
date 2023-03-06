@@ -32,17 +32,26 @@
         <div id="post_raty"></div>
         <script>
           // scriptファイルをどのidの部分に配置するかを指定
-          $(document).on('turbolinks:load', function() {
-          let raty_elem = document.querySelector('#post_raty');
-          raty_elem.innerHTML = ""
-          let option = {  //星画像の指定などのオプションをここに記述,
+          // $(document).on('turbolinks:load', function() {
+          // let raty_elem = document.querySelector('#post_raty');
+          // raty_elem.innerHTML = ""
+          // let option = {  //星画像の指定などのオプションをここに記述,
+          //     starOn: "<%= asset_path('star-on.png') %>",
+          //     starOff: "<%= asset_path('star-off.png') %>",
+          //     starHalf: "<%= asset_path('star-half.png') %>",
+          //     scoreName: 'post_comment[rate]',
+          //   };
+          // raty(raty_elem,option);
+          // });
+          document.querySelector('#post_raty').innerHTML = ""
+          raty(document.querySelector('#post_raty'),
+            {  //星画像の指定などのオプションをここに記述,
               starOn: "<%= asset_path('star-on.png') %>",
               starOff: "<%= asset_path('star-off.png') %>",
               starHalf: "<%= asset_path('star-half.png') %>",
               scoreName: 'post_comment[rate]',
-            };
-          raty(raty_elem,option);
-          });
+            }
+          )
         </script>
       
       <% else %>
