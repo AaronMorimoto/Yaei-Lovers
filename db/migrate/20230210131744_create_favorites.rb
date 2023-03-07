@@ -6,8 +6,8 @@ class CreateFavorites < ActiveRecord::Migration[6.1]
       t.integer :user_id, null: false
       ## 中間テーブルとしての紐付け用投稿id
       t.integer :post_id, null: false
-      ## 会員の登録・更新日時がデフォルトでnowになるように設定しています。
-      t.timestamps null: false, default: ->{ "CURRENT_TIMESTAMP" }
+      
+      t.timestamps null: false
     end
   end
 end

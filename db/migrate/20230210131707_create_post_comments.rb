@@ -10,8 +10,8 @@ class CreatePostComments < ActiveRecord::Migration[6.1]
       t.text :comment, null: false
       ## レビュー用カラム
       t.float :rate, null: false
-      ## 会員の登録・更新日時がデフォルトでnowになるように設定しています。
-      t.timestamps null: false, default: ->{ "CURRENT_TIMESTAMP" }
+      
+      t.timestamps null: false
     end
   end
 end
