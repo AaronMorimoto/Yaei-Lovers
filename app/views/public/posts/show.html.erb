@@ -49,6 +49,39 @@
             </td>
           </tr>
           <tr>
+            <td>
+              <strong>地図　：　<div id="map"></div></strong>
+            </td>
+              
+              <!--google map用のscript-->
+              <script>
+                var map
+                var geocoder
+                var marker
+                var centercoord
+                
+                function initMap(){
+                  geocoder = new google.maps.Geocoder()
+                  
+                  // contollerで登録済みの緯度と経度を変数に入れて渡す
+                  centercoord ={lat: <%= @post.latitude %>, lng: <%= @post.longitude %>};
+                  
+                  map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 14,
+                    center: centercoord
+                  });
+                  
+                  marker = new google.maps.Marker({
+                    position: centercoord,
+                    map: map,
+                  });
+                }
+              </script>
+              
+              <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['MAP_API_KEY']%>&callback=initMap" async defer></script>
+              
+          </tr>
+          <tr>
             <td colspan="3">
               <strong>経度　：　<%= @post.longitude %></strong>
             </td>

@@ -41,19 +41,8 @@
               <div id="post_raty"></div>
             
               <script>
+              
                 // scriptファイルをどのidの部分に配置するかを指定
-                // $(document).on('turbolinks:load', function() {
-                // let raty_element = document.querySelector('#post_raty');
-                // raty_element.innerHTML = ""
-                // let option = {  //星画像の指定などのオプションをここに記述,
-                //     starOn: "<%= asset_path('star-on.png') %>",
-                //     starOff: "<%= asset_path('star-off.png') %>",
-                //     starHalf: "<%= asset_path('star-half.png') %>",
-                //     scoreName: 'post[rate]',
-                //   };
-                // raty(raty_element,option);
-                // });
-                
                 document.querySelector('#post_raty').innerHTML = ""
                 raty(document.querySelector('#post_raty'),
                   {  //星画像の指定などのオプションをここに記述,
@@ -106,10 +95,10 @@
             
             <!--google map用のscript-->
             <script>
-              let map
-              let geocoder
-              let marker
-              let centercoord
+              var map
+              var geocoder
+              var marker
+              var centercoord
               
               function initMap(){
                 geocoder = new google.maps.Geocoder()
@@ -178,11 +167,11 @@
         </tr>
         <tr>
           <td><%= f.label :facility, "周辺設備（スーパーやコンビニなど）" %></td>
-          <td class="form-group"><%= f.text_area :facility, placeholder: "周辺設備（スーパーやコンビニなど）", size: "25x3", class: "textlines-radius" %></td>
+          <td class="form-group"><%= f.text_area :facility, placeholder: "周辺設備（スーパーやコンビニなど）", size: "50x3", class: "textlines-radius" %></td>
         </tr>
         <tr>
           <td><%= f.label :contact, "野営許可申請先" %></td>
-          <td class="form-group"><%= f.text_area :contact, placeholder: "野営許可申請先", size: "25x3", class: "textlines-radius" %></td>
+          <td class="form-group"><%= f.text_area :contact, placeholder: "野営許可申請先", size: "50x3", class: "textlines-radius" %></td>
         </tr>
       </tbody>
     </table>
