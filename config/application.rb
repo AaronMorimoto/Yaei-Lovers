@@ -18,5 +18,8 @@ module YaeiLovers
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    
+    # デフォルトのlocaleを日本語(:ja)に設定
+    config.i18n.default_locale = :ja
   end
 end
