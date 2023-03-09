@@ -25,6 +25,9 @@ window.raty = function(elem,opt) {
   return raty;
 }
 
+//= require swiper/js/swiper.js
+//= require swiper.js
+
 //新規作成したcssファイルの反映（例）
 //import '../stylesheets/ファイル名.css'
 
