@@ -32,7 +32,3 @@ window.raty = function(elem,opt) {
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
-
-
-//= require swiper/swiper-bundle.min.js
-//= require swiper.js
