@@ -1,32 +1,52 @@
-<%= form_with model: post, url: url do |f| %>
+<%#= form_with model: post, url: url do |f| %>
+<%= form_with(model: post, local: true, data: { controller: "images"}) do |f| %>
   <%= render 'layouts/error_messages', resource: post %>
-  <div>
-    <div class="image_field">
-      <!-- image_tagでプレビューを行うためにscriptから送られてくる要素を(id: "img_prev")で指定、(attached? ? ファイル : ファイル)による真偽で表示を変更-->
-      <%= image_tag (post.images.attached? ? post.images[0] : 'no-image.png'), id: "img_prev", class: "upload_image" %>
-      <!-- (multiple: true)で画像を複数投稿、(id: :post_image)でscriptにアップロードしたデータを送る、(accept:'image/*')で全拡張子を許可 -->
-      <span class="btn btn-file btn-primary"><%= f.file_field :images, multiple: true, id: :post_image,  accept:'image/*' %>画像選択</span>
-      <!-- 投稿画像プレビュー機能用javascript -->
-      <script type="text/javascript">
-        $(function() {
-          function readURL(input) {
-            if (input.files && input.files[0]) {
-              var reader = new FileReader();
-              reader.onload = function (e) {
-                $('#img_prev').attr('src', e.target.result);
-              }
-              reader.readAsDataURL(input.files[0]);
-            }
-          }
-          $("#post_image").change(function(){
-            readURL(this);
-          });
-        });
-      </script>
-      
-      <p>選択するとプレビューされます。<br>画像未選択のままだと、<br>「画像準備中」になります。</p>
-      
+
+    <div class="mb-3">
+      <%= f.label :images, "画像", class: "font-semibold block p-1" %>
+      <%= f.file_field :images, multiple: true, accept: "image/jpeg,image/gif,image/png", data: { images_target: "select", action: "change->images#selectImages" } %>
     </div>
+    <div data-images-target="preview">
+      <% if post.images.attached? %>
+        <% post.images.each do |image| %>
+          <div class="image-box inline-flex mx-1 mb-5" data-controller="images" data-images-target= "image_box">
+            <div class="text-center">
+              <%= image_tag image, width: "100" %>
+              <a class="link cursor-pointer" data-action="click->images#deleteImage">削除</a>
+              <%= f.hidden_field :images, name: "post[images][]", style: "display: none", value: "#{image.blob.id}" %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+    
+    
+    <!--<div class="image_field">-->
+       <!--image_tagでプレビューを行うためにscriptから送られてくる要素を(id: "img_prev")で指定、(attached? ? ファイル : ファイル)による真偽で表示を変更-->
+    <!--  <%#= image_tag (post.images.attached? ? post.images[0] : 'no-image.png'), id: "img_prev", class: "upload_image" %>-->
+       <!--(multiple: true)で画像を複数投稿、(id: :post_image)でscriptにアップロードしたデータを送る、(accept:'image/*')で全拡張子を許可 -->
+    <!--  <span class="btn btn-file btn-primary"><%#= f.file_field :images, multiple: true, id: :post_image,  accept:'image/*' %>画像選択</span>-->
+       <!--投稿画像プレビュー機能用javascript -->
+    <!--  <script type="text/javascript">-->
+    <!--    $(function() {-->
+    <!--      function readURL(input) {-->
+    <!--        if (input.files && input.files[0]) {-->
+    <!--          var reader = new FileReader();-->
+    <!--          reader.onload = function (e) {-->
+    <!--            $('#img_prev').attr('src', e.target.result);-->
+    <!--          }-->
+    <!--          reader.readAsDataURL(input.files[0]);-->
+    <!--        }-->
+    <!--      }-->
+    <!--      $("#post_image").change(function(){-->
+    <!--        readURL(this);-->
+    <!--      });-->
+    <!--    });-->
+    <!--  </script>-->
+      
+    <!--  <p>選択するとプレビューされます。<br>画像未選択のままだと、<br>「画像準備中」になります。</p>-->
+      
+    <!--</div>-->
     <table>
       <tbody>
         <tr>
