@@ -45,7 +45,7 @@ Rails.application.routes.draw do
     #退会アクション
     patch 'users/withdraw' => 'users#withdraw', as: 'withdraw_user'
     
-    
+    post "posts/upload_image", to: "posts#upload_image"
     resources :posts do
       resources :post_comments, only: [:create, :destroy]
       resource :favorites, only: [:create, :destroy]

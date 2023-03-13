@@ -18,8 +18,6 @@ class Post < ApplicationRecord
   
   # activestorageで複数の画像を投稿・保存する記述
   has_many_attached :images
-  # postのformでimageを同時投稿できるようにします。
-  accepts_nested_attributes_for :images
   
   
   def get_images

@@ -51,12 +51,32 @@ class Public::PostsController < ApplicationController
     redirect_to posts_path, notice: "投稿の削除に成功しました。"
   end
   
+  # 画像アップロード用のアクション
+  def upload_image
+    @image_blob = create_blob(params[:image])
+    render json: @image_blob
+  end
   
   
   private
 
   def post_params
-    params.require(:post).permit(:user_id, :environment_id, :prefecture_id, :name, :body, :address, :longitude, :latitude, :access, :facility, :contact, :rate, images: [])
+    params.require(:post).permit(:user_id, :environment_id, :prefecture_id, :name, :body, :address, :longitude, :latitude, :access, :facility, :contact, :rate).merge(images: uploaded_images)
+    # params.require(:post).permit(:user_id, :environment_id, :prefecture_id, :name, :body, :address, :longitude, :latitude, :access, :facility, :contact, :rate, images: [])
+  end
+  
+  # アップロード済み画像の検索
+  def uploaded_images
+    params[:post][:images].drop(1).map{|id| ActiveStorage::Blob.find(id)} if params[:post][:images]
+  end
+  
+  # blobデータの作成
+  def create_blob(file)
+    ActiveStorage::Blob.create_and_upload!(
+      io: file.open,
+      filename: file.original_filename,
+      content_type: file.content_type
+    )
   end
   
   def ensure_correct_user
