@@ -6,9 +6,7 @@ class Public::PostsController < ApplicationController
     #絞り込み検索用に記述
     if params[:environment_id].present?
        params[:prefecture_id].present?
-       #params[:rate].present?
       @posts = Post.where(environment_id: "#{params[:environment_id]}", prefecture_id: "#{params[:prefecture_id]}")
-      #@posts = Post.where(environment_id: "#{params[:environment_id]}", prefecture_id: "#{params[:prefecture_id]}", rate: "#{params[:rate]}")
     else
       @posts = Post.all
     end
@@ -18,6 +16,7 @@ class Public::PostsController < ApplicationController
     @post = Post.find(params[:id])
     #投稿詳細ページでコメントを作成するためのメソッド
     @post_comment = PostComment.new
+    @posts = Post.all
   end
 
   def new
@@ -61,13 +60,12 @@ class Public::PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:user_id, :environment_id, :prefecture_id, :name, :body, :address, :longitude, :latitude, :access, :facility, :contact, :rate).merge(images: uploaded_images)
-    # params.require(:post).permit(:user_id, :environment_id, :prefecture_id, :name, :body, :address, :longitude, :latitude, :access, :facility, :contact, :rate, images: [])
+    params.require(:post).permit(:user_id, :environment_id, :prefecture_id, :name, :body, :address, :longitude, :latitude, :access, :facility, :contact, :rate, images: []).merge(images: uploaded_images)
   end
   
   # アップロード済み画像の検索
   def uploaded_images
-    params[:post][:images].drop(1).map{|id| ActiveStorage::Blob.find(id)} if params[:post][:images]
+    params[:post][:images].drop(0).map{|id| ActiveStorage::Blob.find(id)} if params[:post][:images]
   end
   
   # blobデータの作成
