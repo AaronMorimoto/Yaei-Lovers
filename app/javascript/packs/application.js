@@ -17,6 +17,9 @@ import "../stylesheets/application"
 //fortawesomeの反映
 import '@fortawesome/fontawesome-free/js/all'
 
+//controllers内のStimulusスタートファイルの反映
+import 'controllers'
+
 //Ratyの反映
 import Raty from "raty.js"
 window.raty = function(elem,opt) {
@@ -24,6 +27,7 @@ window.raty = function(elem,opt) {
   raty.init();
   return raty;
 }
+
 
 //新規作成したcssファイルの反映（例）
 //import '../stylesheets/ファイル名.css'
