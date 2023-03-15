@@ -20,10 +20,10 @@
             <div data-images-target="preview" class=" previewbox">
               <% if post.images.attached? %>
                 <% post.images.each do |image| %>
-                  <div class="image-box inline-flex mx-1 mb-5" data-controller="images" data-images-target= "image_box">
+                  <div class="image-box deleteposition mx-1 mb-5" data-controller="images" data-images-target= "image_box">
                     <div class="text-center">
-                      <%= image_tag image, width: "100" %>
-                      <a class="link cursor-pointer" data-action="click->images#deleteImage">削除</a>
+                      <%= image_tag image, width: "192", height: "108" %>
+                      <a class="link cursor-pointer text-light" data-action="click->images#deleteImage">削除</a>
                       <%= f.hidden_field :images, name: "post[images][]", style: "display: none", value: "#{image.blob.id}" %>
                     </div>
                   </div>

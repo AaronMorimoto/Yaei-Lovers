@@ -89,5 +89,10 @@
   display: inline-flex;
   margin: 5px;
   padding: 10px;
-  width: 600px;
+  width: 1200px;
+  flex-wrap: wrap;
+}
+
+.deleteposition{
+  display: inline-block;
 }

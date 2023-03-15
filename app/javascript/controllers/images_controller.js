@@ -13,7 +13,7 @@ export default class extends Controller {
       return false
     }
   }
-  
+
   /* ②画像選択時の処理 */
   selectImages(){
     this.errorTarget.textContent = ""
@@ -46,7 +46,7 @@ export default class extends Controller {
       body: formData
     }
 　　 /* fetchで画像ファイルをPostコントローラー(upload_imageアクション)に送信 */
-    fetch("/posts/upload_image", options) 
+    fetch("/posts/upload_image", options)
       .then(response => response.json())
       .then(data => { // Postコントローラーからのレスポンス(blobデータ)
         this.previewImage(file, data.id) // 画像プレビューアクションにblobデータのidを受け渡す
@@ -70,10 +70,11 @@ export default class extends Controller {
       const img = new Image()
       const imgBox = document.createElement("div")
       const imgInnerBox = document.createElement("div")
-      const deleteBtn = document.createElement("a")
+      // const deleteBtn = document.createElement("a")
+      const deleteBtn = document.createElement("div")
       const hiddenField = document.createElement("input")
       const imgBoxAttr = { // imgBoxに設定する属性
-        "class" : "image-box inline-flex mx-1 mb-5",
+        "class" : "image-box deleteposition mx-1 mb-5",
         "data-controller" : "images",
         "data-images-target" : "image_box",
       }
@@ -81,7 +82,7 @@ export default class extends Controller {
         "class" : "text-center"
       }
       const deleteBtnAttr = { // deleteBtnに設定する属性
-        "class" : "link cursor-pointer",
+        "class" : "link cursor-pointer text-light",
         "data-action" : "click->images#deleteImage"
       }
       const hiddenFieldAttr = { // hiddenFieldに設定する属性
@@ -102,7 +103,8 @@ export default class extends Controller {
       imgInnerBox.appendChild(deleteBtn)
       imgInnerBox.appendChild(hiddenField)
       img.src = this.result
-      img.width = 100;
+      img.width = 192;
+      img.height = 108;
 
       preview.appendChild(imgBox) // プレビュー表示用の<div>要素の中にimgBox（プレビュー画像の要素）を入れる
     })
