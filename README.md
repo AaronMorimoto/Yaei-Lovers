@@ -20,6 +20,8 @@
 - テーブル定義書：https://docs.google.com/spreadsheets/d/1cHS8436U6eq8NHlyuk2-HvIII9dnX54bu6-yKAcegwE/edit?usp=sharing
 - アプリケーション詳細設計：https://docs.google.com/spreadsheets/d/1a9Hfq9Ch_P8VazWXsAzfpSuvcgrwADHCdrR9JBkRN2g/edit?usp=sharing
 - テスト仕様書：https://docs.google.com/spreadsheets/d/1tYgGOEsw3gmZebuqSnqpy_MHWsOyWy9t/edit?usp=sharing&ouid=106516889664391115902&rtpof=true&sd=true
+- 実装機能リスト：https://docs.google.com/spreadsheets/d/1t6aFzOiitFehYXnb7GC-GYnSI6pJA9_P5B6Q0zQVjIk/edit?usp=sharing
+- WBS：https://docs.google.com/spreadsheets/d/1vfy5NMHtmP9QUpEub7hjCEe8sv5aDJ0vW67lwY4Ov1M/edit?usp=sharing
 
 ## 開発環境
 - OS：Linux(CentOS)
