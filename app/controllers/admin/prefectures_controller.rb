@@ -4,7 +4,8 @@ class Admin::PrefecturesController < ApplicationController
   
   def index
     @prefecture = Prefecture.new
-    @prefectures = Prefecture.all
+    # @prefectures = Prefecture.all
+    @prefectures = Prefecture.page(params[:page])
   end
 
   def create
@@ -12,7 +13,8 @@ class Admin::PrefecturesController < ApplicationController
     if @prefecture.save
       redirect_to admin_prefectures_path, notice: "県名タグの新規登録に成功しました。"
     else
-      @prefectures = Prefecture.all
+      # @prefectures = Prefecture.all
+      @prefectures = Prefecture.page(params[:page])
       render 'index', notice: "県名タグの新規登録に失敗しました。"
     end
   end

@@ -4,7 +4,8 @@ class Admin::EnvironmentsController < ApplicationController
   
   def index
     @environment = Environment.new
-    @environments = Environment.all
+    # @environments = Environment.all
+    @environments = Environment.page(params[:page])
   end
 
   def create
@@ -12,7 +13,8 @@ class Admin::EnvironmentsController < ApplicationController
     if @environment.save
       redirect_to admin_environments_path, notice: "環境タグの新規登録に成功しました。"
     else
-      @environments = Environment.all
+      # @environments = Environment.all
+      @environments = Environment.page(params[:page])
       render 'index', notice: "環境タグの新規登録に失敗しました。"
     end
   end

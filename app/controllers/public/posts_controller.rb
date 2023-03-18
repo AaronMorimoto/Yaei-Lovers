@@ -8,7 +8,8 @@ class Public::PostsController < ApplicationController
        params[:prefecture_id].present?
       @posts = Post.where(environment_id: "#{params[:environment_id]}", prefecture_id: "#{params[:prefecture_id]}")
     else
-      @posts = Post.all
+      # @posts = Post.all
+      @posts = Post.page(params[:page])
     end
   end
 
@@ -16,7 +17,8 @@ class Public::PostsController < ApplicationController
     @post = Post.find(params[:id])
     #投稿詳細ページでコメントを作成するためのメソッド
     @post_comment = PostComment.new
-    @posts = Post.all
+    # @posts = Post.all
+    @posts = Post.page(params[:page])
   end
 
   def new

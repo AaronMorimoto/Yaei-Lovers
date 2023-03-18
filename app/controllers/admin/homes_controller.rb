@@ -11,7 +11,8 @@ class Admin::HomesController < ApplicationController
       @posts = Post.where(prefecture_id: "#{params[:prefecture_id]}")
     else
     #管理者ログイン後などに表示する全投稿一覧
-      @posts = Post.all
+      # @posts = Post.all
+      @posts = Post.page(params[:page])
     end
   end
   

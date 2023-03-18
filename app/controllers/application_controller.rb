@@ -3,9 +3,12 @@ class ApplicationController < ActionController::Base
   
   #ヘッダーの検索機能
   def search
-    @environments = Environment.all
-    @prefectures = Prefecture.all
-    @posts = Post.all
+    # @environments = Environment.all
+    @environments = Environment.page(params[:page])
+    # @prefectures = Prefecture.all
+    @prefectures = Prefecture.page(params[:page])
+    # @posts = Post.all
+    @posts = Post.page(params[:page])
   end
   
   protected
