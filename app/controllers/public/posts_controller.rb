@@ -9,7 +9,7 @@ class Public::PostsController < ApplicationController
       @posts = Post.where(environment_id: "#{params[:environment_id]}", prefecture_id: "#{params[:prefecture_id]}")
     else
       # @posts = Post.all
-      @posts = Post.page(params[:page])
+      @posts = Post.all.page(params[:page])
     end
   end
 
