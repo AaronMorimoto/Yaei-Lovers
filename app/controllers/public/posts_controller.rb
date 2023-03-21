@@ -18,7 +18,8 @@ class Public::PostsController < ApplicationController
     #投稿詳細ページでコメントを作成するためのメソッド
     @post_comment = PostComment.new
     # @posts = Post.all
-    @posts = Post.page(params[:page])
+    # @post_comments = post.post_comment.all.page(params[:page])
+    @post_comments = @post.post_comments.all.page(params[:page])
   end
 
   def new
