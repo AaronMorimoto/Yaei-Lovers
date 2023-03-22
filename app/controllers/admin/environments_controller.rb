@@ -5,7 +5,7 @@ class Admin::EnvironmentsController < ApplicationController
   def index
     @environment = Environment.new
     # @environments = Environment.all
-    @environments = Environment.page(params[:page])
+    @environments = Environment.all.page(params[:page])
   end
 
   def create

@@ -5,7 +5,7 @@ class Admin::PrefecturesController < ApplicationController
   def index
     @prefecture = Prefecture.new
     # @prefectures = Prefecture.all
-    @prefectures = Prefecture.page(params[:page])
+    @prefectures = Prefecture.all.page(params[:page])
   end
 
   def create
