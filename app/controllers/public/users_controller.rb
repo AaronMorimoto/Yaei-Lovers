@@ -4,7 +4,7 @@ class Public::UsersController < ApplicationController
   
   def show
     # @posts = @user.posts
-    @posts = @user.posts.page(params[:page])
+    @posts = @user.posts.all.page(params[:page])
   end
 
   def edit
@@ -23,7 +23,8 @@ class Public::UsersController < ApplicationController
   
   #お気に入り一覧画面用アクション
   def favorites
-    @posts = @user.posts
+    # @posts = @user.posts.all.page(params[:page])
+    @favorites = @user.posts.all.page(params[:page])
     #favoriteモデルからwhereメソッドとpluckメソッドを使ってログイン中のuser_idとpost_idを引っ張っててfavoritesに代入しています。
     favorites = Favorite.where(user_id: current_user.id).pluck(:post_id)
     @favorite_index = Post.find(favorites)

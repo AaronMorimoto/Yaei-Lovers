@@ -26,5 +26,8 @@
         <td><%= link_to "詳細ページへ", admin_user_path(user), class: "btn btn-primary" %></td>
       </tr>
     <% end %>
+      <tr align="center">
+        <td colspan="7" class='text-light'><%= paginate users %></td>
+      </tr>
   </tbody>
 </table>
