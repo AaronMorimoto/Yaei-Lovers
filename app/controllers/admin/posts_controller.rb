@@ -3,6 +3,7 @@ class Admin::PostsController < ApplicationController
   before_action :set_post
   
   def show
+    @post_comments = @post.post_comments.all.page(params[:page])
   end
   
   def destroy

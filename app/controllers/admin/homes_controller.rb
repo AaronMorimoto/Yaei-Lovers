@@ -12,7 +12,7 @@ class Admin::HomesController < ApplicationController
     else
     #管理者ログイン後などに表示する全投稿一覧
       # @posts = Post.all
-      @posts = Post.page(params[:page])
+      @posts = Post.all.page(params[:page])
     end
   end
   
