@@ -17,8 +17,12 @@ class Public::PostCommentsController < ApplicationController
 
   def destroy
     @comment = PostComment.find(params[:id])
-    @comment.destroy
-    redirect_to post_path(@post), notice: "コメントの削除に成功しました。"
+    if @comment.user_id = current_user.id
+      @comment.destroy
+      redirect_to post_path(@post), notice: "コメントの削除に成功しました。"
+    else
+      redirect_to post_path(@post), notice: "コメントの削除は投稿者のみが行えます。"
+    end
   end
 
   private

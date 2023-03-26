@@ -49,8 +49,12 @@ class Public::PostsController < ApplicationController
   end
   
   def destroy
-    @post.destroy
-    redirect_to posts_path, notice: "投稿の削除に成功しました。"
+    if @post.user_id = current_user.id
+      @post.destroy
+      redirect_to posts_path, notice: "投稿の削除に成功しました。"
+    else
+      redirect_to post_path(@post), notice: "投稿の削除は投稿者のみが行えます。"
+    end
   end
   
   # 画像アップロード用のアクション
