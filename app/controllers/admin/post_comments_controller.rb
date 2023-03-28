@@ -7,7 +7,7 @@ class Admin::PostCommentsController < ApplicationController
       PostComment.find_by(id: params[:id], post_id: params[:post_id]).destroy
       redirect_to admin_post_path(@post), notice: "コメントの削除に成功しました。"
     else
-      redirect_to root_path, notice: "コメントの削除は管理者のみが行えます。"
+      redirect_to admin_root_path, notice: "コメントの削除は管理者のみが行えます。"
     end
     # PostComment.find_by(id: params[:id], post_id: params[:post_id]).destroy
     # redirect_to admin_post_path(@post), notice: "コメントの削除に成功しました。"
