@@ -1,53 +1,57 @@
-<%= form_with(model:[post, post_comment], local: false) do |f| %>
-  <div>
-    <div class="image_field">
-      <%= image_tag (post_comment.images.attached? ? post_comment.images : 'no-image.png'), id: "img_prev", class: "upload_image" %>
-      <span class="btn btn-file btn-primary"><%= f.file_field :images, multiple: true, id: :comment_image,  accept:'image/*' %>画像選択</span>
-      <!-- 投稿画像プレビュー機能用javascript -->
-      <script type="text/javascript">
-        $(function() {
-          function readURL(input) {
-            if (input.files && input.files[0]) {
-              var reader = new FileReader();
-              reader.onload = function (e) {
-                $('#img_prev').attr('src', e.target.result);
+<div class="row">
+  <div class="col">
+    <%= form_with(model:[post, post_comment], local: false) do |f| %>
+      <div>
+        <div class="image_field">
+          <%= image_tag (post_comment.images.attached? ? post_comment.images : 'no-image.png'), id: "img_prev", class: "upload_image" %>
+          <span class="btn btn-file btn-primary"><%= f.file_field :images, multiple: true, id: :comment_image,  accept:'image/*' %>画像選択</span>
+          <!-- 投稿画像プレビュー機能用javascript -->
+          <script type="text/javascript">
+            $(function() {
+              function readURL(input) {
+                if (input.files && input.files[0]) {
+                  var reader = new FileReader();
+                  reader.onload = function (e) {
+                    $('#img_prev').attr('src', e.target.result);
+                  }
+                  reader.readAsDataURL(input.files[0]);
+                }
               }
-              reader.readAsDataURL(input.files[0]);
-            }
-          }
-          $("#comment_image").change(function(){
-            readURL(this);
-          });
-        });
-      </script>
-      
-      <p>選択するとプレビューされます。画像未選択のままだと、「画像準備中」になります。</p>
-    </div>
-    <div class="py-3">
-      <% if post_comment.id === nil %>
-        <div class="form-group" id="star">
-          <%= f.hidden_field :rate, id: :review_star, class:'form-control' %>
+              $("#comment_image").change(function(){
+                readURL(this);
+              });
+            });
+          </script>
+          
+          <p>選択するとプレビューされます。画像未選択のままだと、「画像準備中」になります。</p>
         </div>
-        <!-- 評価javascript -->
-        <div id="post_raty"></div>
-        <script>
-          // scriptファイルをどのidの部分に配置するかを指定
-          document.querySelector('#post_raty').innerHTML = ""
-          raty(document.querySelector('#post_raty'),
-            {  //星画像の指定などのオプションをここに記述,
-              starOn: "<%= asset_path('star-on.png') %>",
-              starOff: "<%= asset_path('star-off.png') %>",
-              starHalf: "<%= asset_path('star-half.png') %>",
-              scoreName: 'post_comment[rate]',
-            }
-          )
-        </script>
-      
-      <% else %>
-        <%= render "public/post_comments/static_rate", post_comment: post_comment %>
-      <% end %>
-    </div>
+        <div class="py-3">
+          <% if post_comment.id === nil %>
+            <div class="form-group" id="star">
+              <%= f.hidden_field :rate, id: :review_star, class:'form-control' %>
+            </div>
+            <!-- 評価javascript -->
+            <div id="post_raty"></div>
+            <script>
+              // scriptファイルをどのidの部分に配置するかを指定
+              document.querySelector('#post_raty').innerHTML = ""
+              raty(document.querySelector('#post_raty'),
+                {  //星画像の指定などのオプションをここに記述,
+                  starOn: "<%= asset_path('star-on.png') %>",
+                  starOff: "<%= asset_path('star-off.png') %>",
+                  starHalf: "<%= asset_path('star-half.png') %>",
+                  scoreName: 'post_comment[rate]',
+                }
+              )
+            </script>
+          
+          <% else %>
+            <%= render "public/post_comments/static_rate", post_comment: post_comment %>
+          <% end %>
+        </div>
+      </div>
+      <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに(日本語のみ)", class: "w-100 comment-textarea" %>
+      <%= f.submit "投稿", class: "btn btn-lg btn-primary btn-base-1 mt-20 pull-right" %>
+    <% end %>
   </div>
-  <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに(日本語のみ)", class: "w-100 comment-textarea" %>
-  <%= f.submit "投稿", class: "btn btn-lg btn-primary btn-base-1 mt-20 pull-right" %>
-<% end %>
+</div>

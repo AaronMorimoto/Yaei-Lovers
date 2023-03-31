@@ -1,14 +1,12 @@
 <div class='container px-5 px-sm-0 form-box'>
   <div class="row">
-    <div class="offset-1 text-center">
-      <h2 class="text-center px-3 py-3">
-        <strong>投稿編集</strong>
-      </h2>
-    </div>
-  </div>
-  <div class='row'>
     <div class='col'>
-      <%= render 'public/posts/form', post: @post, url: post_path(@post), method: :PATCH, submit: '編集内容を保存' %>
+      <div class="offset-1 text-center">
+        <h2 class="text-center px-3 py-3">
+          <strong>投稿編集</strong>
+        </h2>
+      </div>
     </div>
   </div>
+  <%= render 'public/posts/form', post: @post, url: post_path(@post), method: :PATCH, submit: '編集内容を保存' %>
 </div>

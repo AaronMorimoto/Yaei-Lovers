@@ -1,187 +1,190 @@
-<%#= form_with model: post, url: url do |f| %>
-<%= form_with(model: post, local: true, data: { controller: "images"}) do |f| %>
-  <%= render 'layouts/error_messages', resource: post %>
-
-    <table>
-      <tbody>
-        <tr>
-          <td>
-            <div class="mb-3">
-              <%= f.label :images, "画像", class: "font-semibold block p-1" %>
-              <%= f.file_field :images, multiple: true,  accept:"image/*", data: { images_target: "select", action: "change->images#selectImages" } %>
-              
-              <p data-images-target="error" class="text-red-600"></p>
-              
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td colspan="3">
-            <div data-images-target="preview" class=" previewbox">
-              <% if post.images.attached? %>
-                <% post.images.each do |image| %>
-                  <div class="image-box deleteposition mx-1 mb-5" data-controller="images" data-images-target= "image_box">
-                    <div class="text-center">
-                      <%= image_tag image, width: "192", height: "108" %>
-                      <a class="link cursor-pointer text-light" data-action="click->images#deleteImage">削除</a>
-                      <%= f.hidden_field :images, name: "post[images][]", style: "display: none", value: "#{image.blob.id}" %>
+<div class="row">
+  <div class="col">
+    <%= form_with(model: post, local: true, data: { controller: "images"}) do |f| %>
+      <%= render 'layouts/error_messages', resource: post %>
+    
+        <table>
+          <tbody>
+            <tr>
+              <td>
+                <div class="mb-3">
+                  <%= f.label :images, "画像", class: "font-semibold block p-1" %>
+                  <%= f.file_field :images, multiple: true,  accept:"image/*", data: { images_target: "select", action: "change->images#selectImages" } %>
+                  
+                  <p data-images-target="error" class="text-red-600"></p>
+                  
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="3">
+                <div data-images-target="preview" class=" previewbox">
+                  <% if post.images.attached? %>
+                    <% post.images.each do |image| %>
+                      <div class="image-box deleteposition mx-1 mb-5" data-controller="images" data-images-target= "image_box">
+                        <div class="text-center">
+                          <%= image_tag image, width: "192", height: "108" %>
+                          <a class="link cursor-pointer text-light" data-action="click->images#deleteImage">削除</a>
+                          <%= f.hidden_field :images, name: "post[images][]", style: "display: none", value: "#{image.blob.id}" %>
+                        </div>
+                      </div>
+                    <% end %>
+                  <% end %>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="py-3">
+                  <% if post.id.nil? %>
+                    <div class="form-group" id="star">
+                      <%= f.hidden_field :rate, id: :review_star, class:'form-control' %>
+                    </div>
+                    <!-- 評価javascript -->
+                    <div id="post_raty"></div>
+                  
+                    <script>
+                    
+                      // scriptファイルをどのidの部分に配置するかを指定
+                      document.querySelector('#post_raty').innerHTML = ""
+                      raty(document.querySelector('#post_raty'),
+                        {  //星画像の指定などのオプションをここに記述,
+                          starOn: "<%= asset_path('star-on.png') %>",
+                          starOff: "<%= asset_path('star-off.png') %>",
+                          starHalf: "<%= asset_path('star-half.png') %>",
+                          scoreName: 'post[rate]',
+                        }
+                      )
+                    </script>
+                
+                  <% else %>
+                    <%= render "public/posts/static_rate", post: post %>
+                  <% end %>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td><%= f.label :name, "野営地名" %></td>
+              <td class="form-group"><%= f.text_field :name, placeholder: "野営地名", size: 25, class: "textlines-radius"  %></td>
+            </tr>
+            <tr>
+              <td><%= f.label :body, "野営地説明＆コメント" %></td>
+              <td class="form-group"><%= f.text_area :body, placeholder: "野営地説明＆コメント", size: "100x10", class: "textlines-radius"  %></td>
+            </tr>
+            <tr>
+              <td><%= f.label :prefecture_id, "都道府県" %></td>
+              <td class="select_field"><%= f.collection_select :prefecture_id, Prefecture.all, :id, :name %></td>
+            </tr>
+            <tr>
+              <td><%= f.label :environment_id, "環境" %></td>
+              <td class="select_field"><%= f.collection_select :environment_id, Environment.all, :id, :name %></td>
+            </tr>
+            <tr>
+              <td><%= f.label :address, "住所" %></td>
+              <td class="form-group"><%= f.text_area :address, placeholder: "住所", size: "50x3", class: "textlines-radius" %></td>
+            </tr>
+            <tr>
+              <td>地図</td>
+              <td>
+                
+                <div class="form-group">
+                  <!-- buttonをクリックしたらcodeAddressを実行-->
+                  <input type="button" value="住所検索" onclick="codeAddress()">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <div id="map"></div>
                     </div>
                   </div>
-                <% end %>
-              <% end %>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div class="py-3">
-              <% if post.id.nil? %>
-                <div class="form-group" id="star">
-                  <%= f.hidden_field :rate, id: :review_star, class:'form-control' %>
                 </div>
-                <!-- 評価javascript -->
-                <div id="post_raty"></div>
-              
+                
+                <!--google map用のscript-->
                 <script>
-                
-                  // scriptファイルをどのidの部分に配置するかを指定
-                  document.querySelector('#post_raty').innerHTML = ""
-                  raty(document.querySelector('#post_raty'),
-                    {  //星画像の指定などのオプションをここに記述,
-                      starOn: "<%= asset_path('star-on.png') %>",
-                      starOff: "<%= asset_path('star-off.png') %>",
-                      starHalf: "<%= asset_path('star-half.png') %>",
-                      scoreName: 'post[rate]',
-                    }
-                  )
-                </script>
-            
-              <% else %>
-                <%= render "public/posts/static_rate", post: post %>
-              <% end %>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td><%= f.label :name, "野営地名" %></td>
-          <td class="form-group"><%= f.text_field :name, placeholder: "野営地名", size: 25, class: "textlines-radius"  %></td>
-        </tr>
-        <tr>
-          <td><%= f.label :body, "野営地説明＆コメント" %></td>
-          <td class="form-group"><%= f.text_area :body, placeholder: "野営地説明＆コメント", size: "100x10", class: "textlines-radius"  %></td>
-        </tr>
-        <tr>
-          <td><%= f.label :prefecture_id, "都道府県" %></td>
-          <td class="select_field"><%= f.collection_select :prefecture_id, Prefecture.all, :id, :name %></td>
-        </tr>
-        <tr>
-          <td><%= f.label :environment_id, "環境" %></td>
-          <td class="select_field"><%= f.collection_select :environment_id, Environment.all, :id, :name %></td>
-        </tr>
-        <tr>
-          <td><%= f.label :address, "住所" %></td>
-          <td class="form-group"><%= f.text_area :address, placeholder: "住所", size: "50x3", class: "textlines-radius" %></td>
-        </tr>
-        <tr>
-          <td>地図</td>
-          <td>
-            
-            <div class="form-group">
-              <!-- buttonをクリックしたらcodeAddressを実行-->
-              <input type="button" value="住所検索" onclick="codeAddress()">
-              <div class="row">
-                <div class="col-sm-3">
-                  <div id="map"></div>
-                </div>
-              </div>
-            </div>
-            
-            <!--google map用のscript-->
-            <script>
-              var map
-              var geocoder
-              var marker
-              var centercoord
-              
-              function initMap(){
-                geocoder = new google.maps.Geocoder()
-                
-                // 数値が入っていないとマップが非表示になってしまうためnilの場合は東京駅の座標を指定
-                // contollerで登録済みの緯度と経度を変数に入れて渡す
-                centercoord = {lat: <%= @latitude || 35.6809591 %>, lng: <%= @longitude || 139.7673068 %>};
-                
-                map = new google.maps.Map(document.getElementById('map'), {
-                  zoom: 14,
-                  center: centercoord
-                });
-                
-                marker = new google.maps.Marker({
-                  position: centercoord,
-                  map: map,
-                  draggable: true   // ドラッグ可能にする
-                });
-                
-                 // マーカーのドロップ（ドラッグ終了）時のイベント
-                google.maps.event.addListener( marker, 'dragend', function(ev){
-                  // イベントの引数evの、プロパティ.latLngが緯度経度。
-                  document.getElementById('post_latitude').value = ev.latLng.lat();
-                  document.getElementById('post_longitude').value = ev.latLng.lng();
-                });
-              }
-              
-              function codeAddress(){
-                // 入力された住所を取得
-                let inputAddress = document.getElementById('post_address').value;
-                
-                // geocodingしたあとmapを移動
-                geocoder.geocode( { 'address': inputAddress}, function(results, status) {
-                  if (status == 'OK') {
-                    centercoord = results[0].geometry.location;
+                  var map
+                  var geocoder
+                  var marker
+                  var centercoord
+                  
+                  function initMap(){
+                    geocoder = new google.maps.Geocoder()
                     
-                    // map.setCenterで地図が移動
-                    // google.maps.MarkerでGoogleMap上の指定位置にマーカが立つ
-                    map.setCenter(centercoord);
-                    marker.setPosition(centercoord);
-                    document.getElementById('post_latitude').value = centercoord.lat();
-                    document.getElementById('post_longitude').value = centercoord.lng();
+                    // 数値が入っていないとマップが非表示になってしまうためnilの場合は東京駅の座標を指定
+                    // contollerで登録済みの緯度と経度を変数に入れて渡す
+                    centercoord = {lat: <%= @latitude || 35.6809591 %>, lng: <%= @longitude || 139.7673068 %>};
+                    
+                    map = new google.maps.Map(document.getElementById('map'), {
+                      zoom: 14,
+                      center: centercoord
+                    });
+                    
+                    marker = new google.maps.Marker({
+                      position: centercoord,
+                      map: map,
+                      draggable: true   // ドラッグ可能にする
+                    });
+                    
+                     // マーカーのドロップ（ドラッグ終了）時のイベント
+                    google.maps.event.addListener( marker, 'dragend', function(ev){
+                      // イベントの引数evの、プロパティ.latLngが緯度経度。
+                      document.getElementById('post_latitude').value = ev.latLng.lat();
+                      document.getElementById('post_longitude').value = ev.latLng.lng();
+                    });
                   }
-                  else {
-                    alert('該当の住所が見つかりませんでした');
+                  
+                  function codeAddress(){
+                    // 入力された住所を取得
+                    let inputAddress = document.getElementById('post_address').value;
+                    
+                    // geocodingしたあとmapを移動
+                    geocoder.geocode( { 'address': inputAddress}, function(results, status) {
+                      if (status == 'OK') {
+                        centercoord = results[0].geometry.location;
+                        
+                        // map.setCenterで地図が移動
+                        // google.maps.MarkerでGoogleMap上の指定位置にマーカが立つ
+                        map.setCenter(centercoord);
+                        marker.setPosition(centercoord);
+                        document.getElementById('post_latitude').value = centercoord.lat();
+                        document.getElementById('post_longitude').value = centercoord.lng();
+                      }
+                      else {
+                        alert('該当の住所が見つかりませんでした');
+                      }
+                    });
                   }
-                });
-              }
-            </script>
-            
-            <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['MAP_API_KEY']%>&callback=initMap" async defer></script>
-            
-          </td>
-        </tr>
-        <tr>
-          <td><%= f.label :longitude, "経度" %></td>
-          <td class="form-group"><%= f.text_field :longitude, placeholder: "経度", size: 25, class: "textlines-radius" %></td>
-        </tr>
-        <tr>
-          <td><%= f.label :latitude, "緯度" %></td>
-          <td class="form-group"><%= f.text_field :latitude, placeholder: "緯度", size: 25, class: "textlines-radius" %></td>
-        </tr>
-        <tr>
-          <td><%= f.label :access, "アクセス方法" %></td>
-          <td class="form-group"><%= f.text_area :access, placeholder: "アクセス方法", size: "50x3", class: "textlines-radius" %></td>
-        </tr>
-        <tr>
-          <td><%= f.label :facility, "周辺設備（スーパーやコンビニなど）" %></td>
-          <td class="form-group"><%= f.text_area :facility, placeholder: "周辺設備（スーパーやコンビニなど）", size: "50x3", class: "textlines-radius" %></td>
-        </tr>
-        <tr>
-          <td><%= f.label :contact, "野営許可申請先" %></td>
-          <td class="form-group"><%= f.text_area :contact, placeholder: "野営許可申請先", size: "50x3", class: "textlines-radius" %></td>
-        </tr>
-      </tbody>
-    </table>
-    
-    <div class="flex align-center pl5">
-      <%= f.submit submit, class: "btn btn-primary" %>
-    </div>
-    
+                </script>
+                
+                <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['MAP_API_KEY']%>&callback=initMap" async defer></script>
+                
+              </td>
+            </tr>
+            <tr>
+              <td><%= f.label :longitude, "経度" %></td>
+              <td class="form-group"><%= f.text_field :longitude, placeholder: "経度", size: 25, class: "textlines-radius" %></td>
+            </tr>
+            <tr>
+              <td><%= f.label :latitude, "緯度" %></td>
+              <td class="form-group"><%= f.text_field :latitude, placeholder: "緯度", size: 25, class: "textlines-radius" %></td>
+            </tr>
+            <tr>
+              <td><%= f.label :access, "アクセス方法" %></td>
+              <td class="form-group"><%= f.text_area :access, placeholder: "アクセス方法", size: "50x3", class: "textlines-radius" %></td>
+            </tr>
+            <tr>
+              <td><%= f.label :facility, "周辺設備（スーパーやコンビニなど）" %></td>
+              <td class="form-group"><%= f.text_area :facility, placeholder: "周辺設備（スーパーやコンビニなど）", size: "50x3", class: "textlines-radius" %></td>
+            </tr>
+            <tr>
+              <td><%= f.label :contact, "野営許可申請先" %></td>
+              <td class="form-group"><%= f.text_area :contact, placeholder: "野営許可申請先", size: "50x3", class: "textlines-radius" %></td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <div class="flex align-center pl5">
+          <%= f.submit submit, class: "btn btn-primary" %>
+        </div>
+        
+      </div>
+    <% end %>
   </div>
-<% end %>
+</div>
