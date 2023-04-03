@@ -28,7 +28,7 @@ class Public::PostCommentsController < ApplicationController
   private
   
   def post_comment_params
-    params.require(:post_comment).permit(:comment, :rate, images: [])
+    params.require(:post_comment).permit(:comment, :rate, images: []).merge(images: uploaded_images)
   end
   
   # def set_post
