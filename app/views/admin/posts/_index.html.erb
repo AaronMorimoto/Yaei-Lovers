@@ -29,8 +29,6 @@
         <td><%= render "public/post_comments/counter", post: post %></td>
       </tr>
     <% end %>
-      <tr align="center">
-        <td colspan="7"><%= paginate posts %></td>
-      </tr>
   </tbody>
 </table>
+<%= paginate posts %>
