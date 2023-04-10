@@ -2,27 +2,29 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
-.background_img {
-  margin: 0;
-  padding: 0;
-  color: #fff;
-  height: auto;
-  width: auto;
-  background-size: cover;
-  background-position: center;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), image-url("yaei-winter.jpg");
-}
-
 // .background_img {
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   position: relative;
 //   margin: 0;
 //   padding: 0;
 //   color: #fff;
 //   height: auto;
 //   width: auto;
-//   filter: blur(5px);
-//   background: image-url("yaei-winter.jpg") no-repeat 0 0/cover;
+//   background-size: cover;
+//   background-position: center;
+//   background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), image-url("yaei-winter.jpg");
 // }
+
+.background_img {
+    position: relative;
+    z-index: 0;
+}
+.background_img:before {
+    content: '';
+    background-image: image-url("yaei-winter.jpg");
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    filter: blur(3px);
+    z-index: -1;
+}
