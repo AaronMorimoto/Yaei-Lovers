@@ -75,10 +75,10 @@ class Public::PostsController < ApplicationController
     params[:post][:images].drop(0).map{|id| ActiveStorage::Blob.find(id)} if params[:post][:images]
   end
   
-  # コメントのアップロード済み画像の検索
-  def comment_uploaded_images
-    params[:post_comment][:images].drop(0).map{|id| ActiveStorage::Blob.find(id)} if params[:post_comment][:images]
-  end
+  # # コメントのアップロード済み画像の検索
+  # def comment_uploaded_images
+  #   params[:post_comment][:images].drop(0).map{|id| ActiveStorage::Blob.find(id)} if params[:post_comment][:images]
+  # end
   
   # blobデータの作成
   def create_blob(file)

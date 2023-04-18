@@ -31,6 +31,20 @@ class Public::PostCommentsController < ApplicationController
     params.require(:post_comment).permit(:comment, :rate, images: []).merge(images: uploaded_images)
   end
   
+  # コメントのアップロード済み画像の検索
+  def comment_uploaded_images
+    params[:post_comment][:images].drop(0).map{|id| ActiveStorage::Blob.find(id)} if params[:post_comment][:images]
+  end
+  
+  # blobデータの作成
+  def create_blob(file)
+    ActiveStorage::Blob.create_and_upload!(
+      io: file.open,
+      filename: file.original_filename,
+      content_type: file.content_type
+    )
+  end
+  
   # def set_post
   #   @post = Post.find(params[:id])
   # end
