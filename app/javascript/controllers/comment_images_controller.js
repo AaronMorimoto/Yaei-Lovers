@@ -45,8 +45,9 @@ export default class extends Controller {
       },
       body: formData
     }
-　　 /* fetchで画像ファイルをPostコントローラー(upload_imageアクション)に送信 */
-    fetch("/posts/upload_image", options)
+    
+    /* fetchで画像ファイルをPost_commentコントローラー(comment_upload_imageアクション)に送信 */
+    fetch("/post_comments/comment_upload_image", options)
       .then(response => response.json())
       .then(data => { // Postコントローラーからのレスポンス(blobデータ)
         this.previewImage(file, data.id) // 画像プレビューアクションにblobデータのidを受け渡す
@@ -72,7 +73,8 @@ export default class extends Controller {
       const imgInnerBox = document.createElement("div")
       // const deleteBtn = document.createElement("a")
       const deleteBtn = document.createElement("div")
-      const hiddenField = document.createElement("input")
+      // const hiddenField = document.createElement("input")
+      const hiddenFieldComment = document.createElement("input")
       const imgBoxAttr = { // imgBoxに設定する属性
         "class" : "image-box deleteposition mx-1 mb-5",
         "data-controller" : "images",
@@ -85,8 +87,14 @@ export default class extends Controller {
         "class" : "link cursor-pointer text-light",
         "data-action" : "click->images#deleteImage"
       }
-      const hiddenFieldAttr = { // hiddenFieldに設定する属性
-        "name" : "post[images][]",
+      // const hiddenFieldAttr = { // hiddenFieldに設定する属性
+      //   "name" : "post[images][]",
+      //   "style" : "none",
+      //   "type" : "hidden",
+      //   "value" : id, // 受け取ったidをセット
+      // }
+      const hiddenFieldCommentAttr = { // hiddenFieldCommentに設定する属性
+        "name" : "post_comment[images][]",
         "style" : "none",
         "type" : "hidden",
         "value" : id, // 受け取ったidをセット
@@ -94,14 +102,16 @@ export default class extends Controller {
       setAttr(imgBox, imgBoxAttr)
       setAttr(imgInnerBox, imgInnerBoxAttr)
       setAttr(deleteBtn, deleteBtnAttr)
-      setAttr(hiddenField, hiddenFieldAttr)
+      // setAttr(hiddenField, hiddenFieldAttr)
+      setAttr(hiddenFieldComment, hiddenFieldCommentAttr)
 
       deleteBtn.textContent = "削除"
 
       imgBox.appendChild(imgInnerBox)
       imgInnerBox.appendChild(img)
       imgInnerBox.appendChild(deleteBtn)
-      imgInnerBox.appendChild(hiddenField)
+      // imgInnerBox.appendChild(hiddenField)
+      imgInnerBox.appendChild(hiddenFieldComment)
       img.src = this.result
       img.width = 192;
       img.height = 108;

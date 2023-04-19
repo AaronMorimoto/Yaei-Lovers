@@ -47,6 +47,7 @@ Rails.application.routes.draw do
     
     resources :posts do
       resources :post_comments, only: [:create, :destroy]
+      post "post_comments/comment_upload_image", to: "post_comments#comment_upload_image"
       resource :favorites, only: [:create, :destroy]
     end
     post "posts/upload_image", to: "posts#upload_image"

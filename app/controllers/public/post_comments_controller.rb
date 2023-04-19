@@ -24,11 +24,19 @@ class Public::PostCommentsController < ApplicationController
       redirect_to post_path(@post), notice: "コメントの削除は投稿者のみが行えます。"
     end
   end
+  
+  # 画像アップロード用のアクション
+  def comment_upload_image
+    @image_blob = create_blob(params[:image])
+    render json: @image_blob
+  end
+  
+  
 
   private
   
   def post_comment_params
-    params.require(:post_comment).permit(:comment, :rate, images: []).merge(images: uploaded_images)
+    params.require(:post_comment).permit(:comment, :rate, images: []).merge(images: comment_uploaded_images)
   end
   
   # コメントのアップロード済み画像の検索
