@@ -27,8 +27,8 @@ class Public::PostCommentsController < ApplicationController
   
   # 画像アップロード用のアクション
   def comment_upload_image
-    @image_blob = create_blob(params[:image])
-    render json: @image_blob
+    @comment_image_blob = create_blob(params[:image])
+    render json: @comment_image_blob
   end
   
   
