@@ -9,7 +9,8 @@
 }
 
 .image_field {
-  width: 440px;
+  width: 192px;
+  height: 108px;
   text-align: center;
   p {
     margin-top: 10px;
@@ -17,8 +18,8 @@
   }
 }
 .upload_image {
-  width: 440px;
-  height: 300px;
+  width: 192px;
+  height: 108px;
 
   object-fit: cover;
 }
