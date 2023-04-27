@@ -5,23 +5,10 @@
     <%= form_with(model:[post, post_comment], local: false) do |f| %>
       <div>
         
-        <style>
-            .preview-area{ 
-                display: flex;
-                flex-wrap: wrap;
-            }
-            .preview-area img{
-                width: 24%;
-                margin: 0 0 10px;
-                object-fit: contain;
-            }
-            .preview-area img:not(:nth-child(4n)){
-                margin-right: 1.333%;
-            }
-        </style>
-        
         <input type="file" onchange="preview(this)" multiple>
-        <div class="preview-area"></div>
+        <div class="preview-box"></div>
+        
+        <p>選択するとプレビューされます。画像未選択のままだと、「画像準備中」になります。</p>
         
         <script>
             function preview(elem, output = '') {
