@@ -140,20 +140,21 @@ tr:hover    {
 }
 
 .text-bold{
-font-weight:bold;
-font-family:sans-serif;
+  font-weight:bold;
+  font-family:sans-serif;
 }
 
 
 .preview-box{ 
-    display: flex;
-    flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
 }
 .preview-box img{
-    width: 24%;
-    margin: 0 0 10px;
-    object-fit: contain;
+  width: 192px;
+  height: 108px;
+  margin: 0 0 10px;
+  object-fit: contain;
 }
 .preview-area img:not(:nth-child(4n)){
-    margin-right: 1.333%;
+  margin-right: 1.333%;
 }
