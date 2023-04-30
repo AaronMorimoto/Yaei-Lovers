@@ -1,6 +1,5 @@
 class Public::PostCommentsController < ApplicationController
   before_action :authenticate_user!
-  # before_action :set_post
   
   def create
     @post = Post.find(params[:post_id])
@@ -31,8 +30,4 @@ class Public::PostCommentsController < ApplicationController
     params.require(:post_comment).permit(:comment, :rate, images: [])
   end
   
-  # def set_post
-  #   @post = Post.find(params[:id])
-  # end
-
 end
