@@ -8,21 +8,21 @@
   padding: 0;
 }
 
-// .image_field {
-//   width: 192px;
-//   height: 108px;
-//   text-align: center;
-//   p {
-//     margin-top: 10px;
-//     text-align: left;
-//   }
-// }
-// .upload_image {
-//   width: 192px;
-//   height: 108px;
+.image_field {
+  width: 192px;
+  height: 108px;
+  text-align: center;
+  p {
+    margin-top: 10px;
+    text-align: left;
+  }
+}
+.upload_image {
+  width: 192px;
+  height: 108px;
 
-//   object-fit: cover;
-// }
+  object-fit: cover;
+}
 
 .btn-file {
   overflow: hidden;
@@ -87,13 +87,13 @@
   text-align: center;
 }
 
-// .previewbox{
-//   display: inline-flex;
-//   margin: 5px;
-//   padding: 10px;
-//   width: 1200px;
-//   flex-wrap: wrap;
-// }
+.previewbox{
+  display: inline-flex;
+  margin: 5px;
+  padding: 10px;
+  width: 1200px;
+  flex-wrap: wrap;
+}
 
 .deleteposition{
   display: inline-block;
@@ -143,18 +143,3 @@ tr:hover    {
   font-weight:bold;
   font-family:sans-serif;
 }
-
-
-// .preview-box{ 
-//     display: flex;
-//     flex-wrap: wrap;
-// }
-// .preview-box img{
-//     width: 192px;
-//     height: 108px;
-//     margin: 0 0 10px;
-//     object-fit: contain;
-// }
-// .preview-box img:not(:nth-child(4n)){
-//     margin-right: 1.333%;
-// }
